@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CareerAI | Find Your Career Path with AI</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #6C63FF;
+            --primary-light: #8A84FF;
+            --secondary: #4ECDC4;
+            --dark: #121212;
+            --dark-light: #1E1E1E;
+            --dark-lighter: #2D2D2D;
+            --text: #F5F5F5;
+            --text-muted: #ABABAB;
+            --gradient: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--dark);
+            color: var(--text);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+        
+        h1, h2, h3, h4, h5 {
+            font-family: 'Poppins', sans-serif;
+            margin-bottom: 1rem;
+        }
+        
+        section {
+            padding: 5rem 2rem;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        @keyframes glow {
+            0% { box-shadow: 0 0 5px rgba(108, 99, 255, 0.5); }
+            50% { box-shadow: 0 0 20px rgba(108, 99, 255, 0.8); }
+            100% { box-shadow: 0 0 5px rgba(108, 99, 255, 0.5); }
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            background: var(--dark);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 10% 20%, rgba(108, 99, 255, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 90% 80%, rgba(78, 205, 196, 0.1) 0%, transparent 50%);
+            z-index: 1;
+        }
+        
+        .hero-content {
+            max-width: 800px;
+            z-index: 2;
+            animation: fadeIn 1s ease-out;
+        }
+        
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1.5rem;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            color: var(--text-muted);
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 1rem 2rem;
+            background: var(--gradient);
+            color: var(--text);
+            border: none;
+            border-radius: 50px;
+            font-size: 1rem;
+            font-weight: 600;
+            text-decoration: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .btn:hover {
+            transform: translateY(-3px);
+            animation: glow 1.5s infinite;
+        }
+        
+        /* About Section */
+        .about {
+            background-color: var(--dark-light);
+            text-align: center;
+            animation: fadeIn 1s ease-out;
+        }
+        
+        .about h2 {
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+        }
+        
+        .about p {
+            max-width: 700px;
+            margin: 0 auto;
+            font-size: 1.2rem;
+            color: var(--text-muted);
+        }
+        
+        /* Features Section */
+        .features {
+            background-color: var(--dark);
+        }
+        
+        .features h2 {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+        }
+        
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+        
+        .feature-card {
+            background-color: var(--dark-lighter);
+            border-radius: 10px;
+            padding: 2rem;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            height: 100%;
+            animation: fadeIn 1s ease-out;
+            animation-fill-mode: both;
+        }
+        
+        .feature-card:nth-child(1) { animation-delay: 0.1s; }
+        .feature-card:nth-child(2) { animation-delay: 0.3s; }
+        .feature-card:nth-child(3) { animation-delay: 0.5s; }
+        .feature-card:nth-child(4) { animation-delay: 0.7s; }
+        
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+        }
+        
+        .feature-card h3 {
+            font-size: 1.5rem;
+            color: var(--primary-light);
+            margin-bottom: 1rem;
+        }
+        
+        .feature-card p {
+            color: var(--text-muted);
+        }
+        
+        .feature-icon {
+            width: 60px;
+            height: 60px;
+            margin-bottom: 1.5rem;
+            border-radius: 50%;
+            background: var(--gradient);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+        }
+        
+        /* Testimonials Section */
+        .testimonials {
+            background-color: var(--dark-light);
+            text-align: center;
+        }
+        
+        .testimonials h2 {
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+        }
+        
+        .testimonial-carousel {
+            position: relative;
+            max-width: 800px;
+            margin: 0 auto;
+            overflow: hidden;
+        }
+        
+        .testimonial-track {
+            display: flex;
+            width: 300%;
+            transition: transform 0.5s ease;
+        }
+        
+        .testimonial {
+            flex: 1;
+            padding: 2rem;
+        }
+        
+        .testimonial-content {
+            background-color: var(--dark-lighter);
+            padding: 2rem;
+            border-radius: 10px;
+            position: relative;
+        }
+        
+        .testimonial-content::before {
+            content: '"';
+            font-size: 5rem;
+            position: absolute;
+            top: -20px;
+            left: 20px;
+            color: var(--primary);
+            opacity: 0.3;
+        }
+        
+        .testimonial p {
+            font-style: italic;
+            margin-bottom: 1.5rem;
+        }
+        
+        .testimonial .author {
+            font-weight: 600;
+            color: var(--primary-light);
+        }
+        
+        .testimonial .position {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+        }
+        
+        .carousel-controls {
+            margin-top: 2rem;
+        }
+        
+        .carousel-controls input {
+            display: none;
+        }
+        
+        .control-label {
+            display: inline-block;
+            width: 12px;
+            height: 12px;
+            background-color: var(--dark-lighter);
+            border-radius: 50%;
+            margin: 0 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        
+        #testimonial1:checked ~ .testimonial-track {
+            transform: translateX(0);
+        }
+        
+        #testimonial2:checked ~ .testimonial-track {
+            transform: translateX(-33.333%);
+        }
+        
+        #testimonial3:checked ~ .testimonial-track {
+            transform: translateX(-66.666%);
+        }
+        
+        #testimonial1:checked ~ .carousel-controls .label1,
+        #testimonial2:checked ~ .carousel-controls .label2,
+        #testimonial3:checked ~ .carousel-controls .label3 {
+            background-color: var(--primary);
+        }
+        
+        /* Footer */
+        .footer {
+            background-color: var(--dark);
+            padding: 3rem 2rem;
+        }
+        
+        .footer-content {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .footer-logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--text);
+            text-decoration: none;
+        }
+        
+        .footer-logo span {
+            color: var(--primary);
+        }
+        
+        .footer-links {
+            display: flex;
+            gap: 1.5rem;
+        }
+        
+        .footer-links a {
+            color: var(--text-muted);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        
+        .footer-links a:hover {
+            color: var(--primary);
+        }
+        
+        .copyright {
+            width: 100%;
+            text-align: center;
+            margin-top: 2rem;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .features-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+            
+            .footer-content {
+                flex-direction: column;
+                gap: 1.5rem;
+            }
+            
+            .footer-links {
+                margin-top: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Find Your Career Path with AI</h1>
+            <p>Discover opportunities tailored to your skills and passion</p>
+            <a href="#" class="btn">Get Started</a>
+        </div>
+    </section>
+    
+    <!-- About Section -->
+    <section class="about">
+        <div class="container">
+            <h2>About Our Platform</h2>
+            <p>Using AI and real-time job market data, we help you build the perfect career roadmap.</p>
+        </div>
+    </section>
+    
+    <!-- Features Section -->
+    <section class="features">
+        <div class="container">
+            <h2>Our Features</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">🧠</div>
+                    <h3>Skill Assessment Quiz</h3>
+                    <p>Discover your strengths and areas for growth with our comprehensive skill assessment powered by AI.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">📄</div>
+                    <h3>Resume Feedback with AI</h3>
+                    <p>Get personalized suggestions to improve your resume and stand out to potential employers.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">📊</div>
+                    <h3>Career Market Insights</h3>
+                    <p>Access real-time data on job market trends, salary ranges, and emerging opportunities.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🎯</div>
+                    <h3>Interview Preparation</h3>
+                    <p>Practice with our AI-powered interview simulator that adapts to your target position.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Testimonials Section -->
+    <section class="testimonials">
+        <div class="container">
+            <h2>Success Stories</h2>
+            <div class="testimonial-carousel">
+                <input type="radio" name="testimonial" id="testimonial1" checked>
+                <input type="radio" name="testimonial" id="testimonial2">
+                <input type="radio" name="testimonial" id="testimonial3">
+                
+                <div class="testimonial-track">
+                    <div class="testimonial">
+                        <div class="testimonial-content">
+                            <p>CareerAI helped me identify skills I needed to transition into UX design. Within 3 months of following the personalized roadmap, I landed my dream job at a tech startup.</p>
+                            <div class="author">Sarah Johnson</div>
+                            <div class="position">UX Designer at TechFlow</div>
+                        </div>
+                    </div>
+                    <div class="testimonial">
+                        <div class="testimonial-content">
+                            <p>The AI-powered resume feedback was a game-changer. After implementing the suggestions, my interview callback rate tripled, and I secured a position that increased my salary by 35%.</p>
+                            <div class="author">Michael Chen</div>
+                            <div class="position">Data Analyst at Quantum Analytics</div>
+                        </div>
+                    </div>
+                    <div class="testimonial">
+                        <div class="testimonial-content">
+                            <p>As someone changing careers after 10 years, I was lost. The career market insights showed me which of my skills were transferable and which certifications would give me the edge. Now I'm thriving in a new industry!</p>
+                            <div class="author">Priya Patel</div>
+                            <div class="position">Project Manager at InnovateCorp</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="carousel-controls">
+                    <label for="testimonial1" class="control-label label1"></label>
+                    <label for="testimonial2" class="control-label label2"></label>
+                    <label for="testimonial3" class="control-label label3"></label>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <a href="#" class="footer-logo">Career<span>AI</span></a>
+                <div class="footer-links">
+                    <a href="#">Login</a>
+                    <a href="#">Signup</a>
+                    <a href="#">Contact Us</a>
+                </div>
+            </div>
+            <div class="copyright">
+                © 2025 CareerAI. All rights reserved.
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
