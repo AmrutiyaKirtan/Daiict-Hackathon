@@ -29,11 +29,7 @@ You are a resume reviewing expert. Please review the attached resume image based
 
 1. **Spelling and Grammar**: Point out any spelling or grammatical errors.
 2. **ATS-Friendliness**: Evaluate if the resume is likely to be parsed correctly by an Applicant Tracking System (ATS).
-<<<<<<< HEAD
 3. **Use of Action Words**: Check if the resume uses strong, industry-approved action words (refer to Harvard's action word list).
-=======
-3. **Use of Action Words**: Check if the resume uses strong, industry-approved action words (refer to Harvard’s action word list).
->>>>>>> 0b45fb5f626b4fba6b11a8aef65fa86744bd659f
 4. **Structure and Formatting**: Comment on the layout, font consistency, white space, section headers, and overall readability.
 5. **Professional Tone**: Evaluate the tone and language of the resume.
 6. **Suggestions for Improvement**: Give concise suggestions to improve the resume.
