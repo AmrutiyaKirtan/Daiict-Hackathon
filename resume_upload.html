@@ -86,25 +86,14 @@
       overflow: hidden;
     }
     
-    .upload-interface.hidden {
-      display: none;
-    }
-    
     .upload-area {
-      border: 2px dashed var(--accent-transparent);
-      border-radius: 12px;
-      padding: 3rem 2rem;
       cursor: pointer;
-      transition: all 0.3s ease;
-      background-color: var(--dark-lighter);
-      position: relative;
-      overflow: hidden;
     }
     
     .upload-area:hover {
       border-color: var(--accent);
-      box-shadow: 0 0 15px rgba(0, 255, 198, 0.2);
-      transform: translateY(-5px);
+      box-shadow: 0 0 15px rgba(0, 355, 198, 20.200);
+      transform: translateY(-20px);
     }
     
     .upload-icon {
@@ -168,6 +157,13 @@
       z-index: -1;
     }
     
+    /* Additional CSS for browse button to ensure it doesn't trigger the parent */
+    .browse-btn-container {
+      position: relative;
+      z-index: 10;
+    }
+    
+    /* Rest of your CSS remains the same */
     /* Split View Interface */
     .feedback-interface {
       display: none;
@@ -475,9 +471,9 @@
       </div>
       
       <!-- Initial Upload Interface -->
-      <form action="resume.py" method="POST" enctype="multipart/form-data">
+      <form id="upload-form" action="/upload" method="POST" enctype="multipart/form-data">
         <div class="upload-interface" id="upload-interface">
-          <label for="resume-upload" class="upload-area" id="upload-area">
+          <div class="upload-area" id="upload-area">
             <div class="upload-icon">
               <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                 <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
@@ -493,9 +489,11 @@
                 <span class="file-type">DOCX</span>
                 <span class="file-type">JPG</span>
               </div>
-              <button type="button" class="browse-btn" id="browse-btn">Browse Files</button>
+              <div class="browse-btn-container">
+                <button type="button" class="browse-btn" id="browse-btn">Browse Files</button>
+              </div>
             </div>
-          </label>
+          </div>
           <div class="file-name" id="file-name">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
               <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
@@ -503,7 +501,7 @@
             </svg>
             <span id="file-name-text">No file selected</span>
           </div>
-          <input type="file" id="resume-upload" name="resume" accept=".pdf,.docx,.doc,.jpg,.jpeg,.png" required>
+          <input type="file" id="resume-upload" name="file" accept=".pdf,.docx,.doc,.jpg,.jpeg,.png" required>
           <button type="submit" class="action-btn primary-btn">Submit</button>
         </div>
       </form>
@@ -633,6 +631,7 @@
   </section>
   
   <script>
+    // DOM elements
     const uploadInterface = document.getElementById('upload-interface');
     const feedbackInterface = document.getElementById('feedback-interface');
     const uploadArea = document.getElementById('upload-area');
@@ -643,61 +642,62 @@
     const fileNameText = document.getElementById('file-name-text');
     const previewFileName = document.getElementById('preview-file-name');
     const loadingOverlay = document.getElementById('loading-overlay');
-  
+
+    // Browse button click - open file dialog
     browseBtn.addEventListener('click', function(e) {
       e.preventDefault();
       fileInput.click();
     });
-  
-    fileInput.addEventListener("change", () => {
-      if (fileInput.files.length > 0) {
-        handleFileUpload(fileInput.files[0]);
+
+    // File input change
+    fileInput.addEventListener('change', function() {
+      if (this.files && this.files[0]) {
+        fileNameText.textContent = this.files[0].name;
+        fileName.classList.add('active');
+        previewFileName.textContent = this.files[0].name;
       }
     });
-  
+
+    // Handle form submission
+    document.getElementById('upload-form').addEventListener('submit', function(e) {
+      loadingOverlay.classList.add('active');
+    });
+
+    // Back button click
     backBtn.addEventListener('click', function() {
       feedbackInterface.classList.remove('active');
       uploadInterface.style.display = 'block';
     });
-  
-    function handleFileUpload(file) {
-      fileNameText.textContent = file.name;
-      fileName.classList.add('active');
-      previewFileName.textContent = file.name;
-  
-      loadingOverlay.classList.add('active');
-  
-      setTimeout(function () {
-        loadingOverlay.classList.remove('active');
-        uploadInterface.style.display = 'none';
-        feedbackInterface.classList.add('active');
-      }, 1500);
-    }
-  
-    uploadArea.addEventListener('dragover', function (e) {
+
+    // Drag and drop functionality
+    uploadArea.addEventListener('dragover', function(e) {
       e.preventDefault();
       this.classList.add('dragover');
     });
-  
-    uploadArea.addEventListener('dragleave', function () {
+
+    uploadArea.addEventListener('dragleave', function() {
       this.classList.remove('dragover');
     });
-  
-    uploadArea.addEventListener('drop', function (e) {
+
+    uploadArea.addEventListener('drop', function(e) {
       e.preventDefault();
       this.classList.remove('dragover');
-  
+      
       if (e.dataTransfer.files && e.dataTransfer.files[0]) {
         fileInput.files = e.dataTransfer.files;
-        handleFileUpload(e.dataTransfer.files[0]);
+        fileNameText.textContent = e.dataTransfer.files[0].name;
+        fileName.classList.add('active');
+        previewFileName.textContent = e.dataTransfer.files[0].name;
       }
     });
-  
-    uploadArea.addEventListener('click', function () {
-      fileInput.click();
+
+    // Make only the upload area (but NOT the button) clickable
+    uploadArea.addEventListener('click', function(e) {
+      // Check if the click is on the browse button or its children
+      if (!e.target.closest('.browse-btn')) {
+        fileInput.click();
+      }
     });
   </script>
-  
-  
 </body>
 </html>
