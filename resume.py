@@ -13,7 +13,7 @@ app = Flask(__name__, template_folder='.')
 CORS(app, supports_credentials=True)
 
 # Configure upload folder
-UPLOAD_FOLDER = 'uploads'
+UPLOAD_FOLDER = '/upload'
 if not os.path.exists(UPLOAD_FOLDER):
     os.makedirs(UPLOAD_FOLDER)
 
