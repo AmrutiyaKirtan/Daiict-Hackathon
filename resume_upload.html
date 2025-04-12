@@ -534,8 +534,8 @@
                 <span id="preview-file-name">resume-john-smith.pdf</span>
               </div>
             </div>
-            <div class="preview-content">
-              <div class="placeholder-pdf"></div>
+            <div class="preview-content" id="preview-content">
+              <!-- This will be replaced with the PDF viewer -->
             </div>
           </div>
           
@@ -709,14 +709,16 @@
         // Update ATS optimization
         updateFeedbackSection('ATS Optimization', data.ats_optimization);
         
-        // Display the uploaded image in the preview section
-        const previewContent = document.querySelector('.preview-content');
-        const imgElement = document.createElement('img');
-        imgElement.src = URL.createObjectURL(file); // Create a URL for the uploaded file
-        imgElement.style.width = '100%'; // Adjust as needed
-        imgElement.style.height = 'auto'; // Maintain aspect ratio
+        // Display the uploaded PDF in the preview section
+        const previewContent = document.getElementById('preview-content');
+        const fileURL = URL.createObjectURL(file); // Create a URL for the uploaded file
+        const iframe = document.createElement('iframe');
+        iframe.src = fileURL;
+        iframe.style.width = '100%'; // Adjust as needed
+        iframe.style.height = '600px'; // Set a height for the iframe
+        iframe.frameBorder = '0'; // Remove border
         previewContent.innerHTML = ''; // Clear previous content
-        previewContent.appendChild(imgElement); // Add the image to the preview
+        previewContent.appendChild(iframe); // Add the iframe to the preview
       })
       .catch(error => {
         // Hide loading overlay

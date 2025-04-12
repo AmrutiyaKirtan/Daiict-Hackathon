@@ -1,4 +1,3 @@
-
 from flask import Flask, request, render_template, jsonify, send_from_directory
 from flask_cors import CORS
 from google import genai
@@ -53,12 +52,12 @@ def analyze_resume(image):
     3. **Use of Action Words**: Check if the resume uses strong, industry-approved action words (refer to Harvard's action word list).
     4. **Structure and Formatting**: Comment on the layout, font consistency, white space, section headers, and overall readability.
     5. **Professional Tone**: Evaluate the tone and language of the resume.
-    6. **Suggestions for Improvement**: Give concise suggestions to improve the resume.
+    6. **Suggestions for Improvement**: Provide at least one specific suggestion to improve the resume in each of the following areas. if there are no specific suggestion available just give a general tip for the following area.
 
     Format your response in three sections:
-    1. Content Improvements (with 3-4 bullet points)
-    2. Formatting Suggestions (with 3-4 bullet points)
-    3. ATS Optimization (with 3-4 bullet points)
+    1. Content Improvements (with 1 bullet point)
+    2. Formatting Suggestions (with 1 bullet point)
+    3. ATS Optimization (with 1 bullet point)
 
     Also calculate a "Resume Strength" percentage score from 0-100 based on the overall quality.
     """
@@ -73,7 +72,6 @@ def analyze_resume(image):
         feedback = response.text
         
         # A simple algorithm to generate a resume strength score if not provided in the response
-        # This is a placeholder - you may want to implement a more sophisticated scoring system
         score = calculate_resume_strength(feedback)
         
         # Structure the response to match the expected format from the frontend
@@ -111,7 +109,7 @@ def calculate_resume_strength(feedback):
     return max(40, min(95, score))  # Cap between 40% and 95%
 
 def extract_section(feedback, section_name):
-    # Simple parser to extract bullet points from a section
+    # Simple parser to extract a single line of feedback from a section
     import re
     
     # Try to find the section
@@ -119,29 +117,20 @@ def extract_section(feedback, section_name):
     section_match = re.search(section_pattern, feedback, re.DOTALL)
     
     if not section_match:
-        # Return placeholder items if section not found
-        return [
-            f"Recommendation for {section_name.lower()}",
-            f"Another suggestion related to {section_name.lower()}"
-        ]
+        # Return a default message if section not found
+        return ["No specific feedback available for this section."]
     
     section_text = section_match.group(1).strip()
     
-    # Extract bullet points (lines starting with -, *, •, or numbers)
+    # Extract the first bullet point or line
     bullet_points = re.findall(r'(?:^|\n)\s*(?:[-•*]|\d+\.)\s*(.*?)(?=\n\s*(?:[-•*]|\d+\.)|$)', section_text, re.DOTALL)
     
-    # If no bullet points found, split by new lines
-    if not bullet_points:
-        bullet_points = [line.strip() for line in section_text.split('\n') if line.strip()]
+    # If no bullet points found or if the first bullet point is just "*", return a default message
+    if not bullet_points or bullet_points[0].strip() == "*":
+        return [f"No specific feedback available for {section_name.lower()}."]
     
-    # Limit to 3-4 bullet points and clean them up
-    bullet_points = [point.strip() for point in bullet_points[:4]]
-    
-    # Ensure we have at least some content
-    if not bullet_points:
-        bullet_points = [f"Recommendation for {section_name.lower()}"]
-    
-    return bullet_points
+    # Return the first bullet point as the feedback
+    return [bullet_points[0].strip()]
 
 @app.route('/')
 def index():
