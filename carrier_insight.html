@@ -1,0 +1,563 @@
+<style>
+  /* Career Market Insights Section Styles */
+  #career-market {
+  background: linear-gradient(145deg, #1e1e2f 0%, #2a2a45 100%);
+  color: #f5f5f5;
+  padding: 2rem;
+  width: 100vw;
+  height: 100vh;
+  overflow-y: auto;
+  overflow-x: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-sizing: border-box;
+}
+   
+#career-market h2 {
+  text-align: center;
+  margin-bottom: 2.5rem;
+  font-size: 2.2rem;
+  color: #8be9fd;
+  font-weight: 600;
+  letter-spacing: 1.2px;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+}
+
+.market-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 2rem;
+  max-width: 1200px;
+  width: 100%;
+  padding-bottom: 3rem;
+}
+
+  .market-card {
+    background-color: #2a2a45;
+    border-radius: 0.8rem;
+    padding: 1.5rem;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    height: 100%;
+    width: 100%;
+    box-sizing: border-box;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .market-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+  }
+
+  .market-card h3 {
+    color: #50fa7b;
+    font-size: 1.3rem;
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    word-wrap: break-word;
+  }
+
+  /* Salary Explorer Styles */
+  #role-selector {
+    width: 100%;
+    padding: 0.8rem;
+    background-color: #343456;
+    color: #f5f5f5;
+    border: 1px solid #50fa7b;
+    border-radius: 0.5rem;
+    font-size: 1rem;
+    margin-bottom: 1.2rem;
+    cursor: pointer;
+    outline: none;
+    box-sizing: border-box;
+  }
+
+  #role-selector:focus {
+    box-shadow: 0 0 0 2px rgba(80, 250, 123, 0.5);
+  }
+
+  .salary-info {
+    opacity: 0;
+    transition: opacity 0.5s ease;
+    height: 0;
+    overflow: hidden;
+    width: 100%;
+  }
+
+  .salary-info.active {
+    opacity: 1;
+    height: auto;
+    overflow: visible;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .salary-item {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 0.8rem;
+    padding-bottom: 0.8rem;
+    border-bottom: 1px solid #3d3d5c;
+    flex-wrap: wrap;
+    width: 100%;
+  }
+
+  .salary-item:last-child {
+    border-bottom: none;
+    margin-bottom: 0;
+    padding-bottom: 0;
+  }
+
+  .salary-label {
+    font-weight: 300;
+    color: #bd93f9;
+    margin-right: 0.5rem;
+  }
+
+  .salary-value {
+    font-weight: 600;
+    color: #f8f8f2;
+  }
+
+  .locations {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+    margin-top: 0.5rem;
+    width: 100%;
+  }
+
+  .location-tag {
+    background-color: #483d8b;
+    color: #f8f8f2;
+    padding: 0.3rem 0.6rem;
+    border-radius: 1rem;
+    font-size: 0.8rem;
+    display: inline-block;
+    margin-bottom: 0.3rem;
+  }
+
+  /* Emerging Roles Styles */
+  .emerging-roles-list {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    width: 100%;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .role-item {
+    padding: 0.8rem;
+    margin-bottom: 0.8rem;
+    border-radius: 0.5rem;
+    background-color: #343456;
+    transition: transform 0.2s ease;
+    cursor: pointer;
+    word-wrap: break-word;
+    flex: 1;
+  }
+
+  .role-item:last-child {
+    margin-bottom: 0;
+  }
+
+  .role-item:hover {
+    transform: scale(1.02);
+    background-color: #3d3d6b;
+  }
+
+  .role-item h4 {
+    margin: 0 0 0.3rem 0;
+    color: #ff79c6;
+    font-size: 1.1rem;
+  }
+
+  .role-item p {
+    margin: 0;
+    font-size: 0.9rem;
+    color: #f8f8f2;
+    line-height: 1.4;
+  }
+
+  /* Job Market Trends Styles */
+  .trend-list {
+    list-style-type: none;
+    padding: 0;
+    width: 100%;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    margin: 0;
+  }
+
+  .trend-item {
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 1rem;
+    padding: 0.8rem;
+    background-color: #343456;
+    border-radius: 0.5rem;
+    transition: transform 0.2s ease;
+    word-wrap: break-word;
+    flex: 1;
+  }
+
+  .trend-item:last-child {
+    margin-bottom: 0;
+  }
+
+  .trend-item:hover {
+    transform: translateX(5px);
+  }
+
+  .trend-item span {
+    margin-left: 0.5rem;
+  }
+
+  .trend-emoji {
+    font-size: 1.5rem;
+    min-width: 2rem;
+    display: inline-block;
+  }
+
+  /* Career Tips Styles */
+  .tip-list {
+    list-style-type: none;
+    padding: 0;
+    width: 100%;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    margin: 0;
+  }
+
+  .tip-item {
+    display: flex;
+    margin-bottom: 1rem;
+    padding: 0.8rem;
+    background-color: #343456;
+    border-radius: 0.5rem;
+    transition: transform 0.2s ease;
+    word-wrap: break-word;
+    flex: 1;
+  }
+
+  .tip-item:last-child {
+    margin-bottom: 0;
+  }
+
+  .tip-item:hover {
+    transform: translateX(5px);
+  }
+
+  .tip-emoji {
+    font-size: 1.5rem;
+    margin-right: 0.8rem;
+    min-width: 1.5rem;
+    display: inline-block;
+  }
+
+  /* Responsive Adjustments */
+  @media (max-width: 1200px) {
+    .market-grid {
+      grid-template-columns: repeat(auto-fill, minmax(calc(33.333% - 1.5rem), 1fr));
+    }
+  }
+
+  @media (max-width: 992px) {
+    .market-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (max-width: 768px) {
+    .market-grid {
+      grid-template-columns: 1fr;
+      gap: 1rem;
+    }
+    
+    .market-card {
+      margin-bottom: 0;
+    }
+
+    .salary-item {
+      flex-direction: column;
+    }
+
+    .salary-value {
+      margin-top: 0.3rem;
+    }
+
+    #career-market {
+      padding: 1.5rem;
+    }
+  }
+
+  @media (max-width: 480px) {
+    #career-market {
+      padding: 1rem;
+    }
+
+    .market-card {
+      padding: 1rem;
+    }
+
+    .market-card h3 {
+      font-size: 1.2rem;
+    }
+
+    .trend-item, .tip-item {
+      flex-direction: column;
+    }
+
+    .trend-emoji, .tip-emoji {
+      margin-bottom: 0.5rem;
+    }
+  }
+
+  /* Full screen adjustments */
+  .section {
+  width: 100vw;
+  height: 100vh;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+</style>
+
+<section id="career-market" class="section">
+  <h2>📈 Career Market Insights</h2>
+  
+  <div class="market-grid">
+    <!-- Salary Explorer Card -->
+    <div class="market-card">
+      <h3><span>💰</span> Salary Explorer</h3>
+      <select id="role-selector">
+        <option value="">Select a role</option>
+        <option value="web-developer">Web Developer</option>
+        <option value="data-scientist">Data Scientist</option>
+        <option value="cybersecurity-analyst">Cybersecurity Analyst</option>
+      </select>
+      
+      <!-- Web Developer Salary Info -->
+      <div id="web-developer-info" class="salary-info">
+        <div class="salary-item">
+          <span class="salary-label">Entry-level:</span>
+          <span class="salary-value">$65,000 - $85,000</span>
+        </div>
+        <div class="salary-item">
+          <span class="salary-label">Average:</span>
+          <span class="salary-value">$95,000</span>
+        </div>
+        <div class="salary-item">
+          <span class="salary-label">Senior-level:</span>
+          <span class="salary-value">$120,000 - $160,000</span>
+        </div>
+        <div class="salary-item">
+          <span class="salary-label">Top hiring locations:</span>
+          <div class="locations">
+            <span class="location-tag">San Francisco</span>
+            <span class="location-tag">New York</span>
+            <span class="location-tag">Seattle</span>
+            <span class="location-tag">Austin</span>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Data Scientist Salary Info -->
+      <div id="data-scientist-info" class="salary-info">
+        <div class="salary-item">
+          <span class="salary-label">Entry-level:</span>
+          <span class="salary-value">$85,000 - $110,000</span>
+        </div>
+        <div class="salary-item">
+          <span class="salary-label">Average:</span>
+          <span class="salary-value">$120,000</span>
+        </div>
+        <div class="salary-item">
+          <span class="salary-label">Senior-level:</span>
+          <span class="salary-value">$140,000 - $180,000</span>
+        </div>
+        <div class="salary-item">
+          <span class="salary-label">Top hiring locations:</span>
+          <div class="locations">
+            <span class="location-tag">San Francisco</span>
+            <span class="location-tag">Boston</span>
+            <span class="location-tag">Seattle</span>
+            <span class="location-tag">New York</span>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Cybersecurity Analyst Salary Info -->
+      <div id="cybersecurity-analyst-info" class="salary-info">
+        <div class="salary-item">
+          <span class="salary-label">Entry-level:</span>
+          <span class="salary-value">$70,000 - $90,000</span>
+        </div>
+        <div class="salary-item">
+          <span class="salary-label">Average:</span>
+          <span class="salary-value">$105,000</span>
+        </div>
+        <div class="salary-item">
+          <span class="salary-label">Senior-level:</span>
+          <span class="salary-value">$130,000 - $170,000</span>
+        </div>
+        <div class="salary-item">
+          <span class="salary-label">Top hiring locations:</span>
+          <div class="locations">
+            <span class="location-tag">Washington DC</span>
+            <span class="location-tag">New York</span>
+            <span class="location-tag">Boston</span>
+            <span class="location-tag">Atlanta</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Emerging Roles Card -->
+    <div class="market-card">
+      <h3><span>🚀</span> Emerging Roles</h3>
+      <ul class="emerging-roles-list">
+        <li class="role-item">
+          <h4>AI Product Manager</h4>
+          <p>Guides AI product development from concept to launch, ensuring ethical implementation and real user value.</p>
+        </li>
+        <li class="role-item">
+          <h4>Prompt Engineer</h4>
+          <p>Specializes in crafting effective prompts to optimize AI models for specific business needs and use cases.</p>
+        </li>
+        <li class="role-item">
+          <h4>Cloud Security Architect</h4>
+          <p>Designs resilient cloud infrastructure with focus on zero-trust architecture and compliance automation.</p>
+        </li>
+      </ul>
+    </div>
+    
+    <!-- Job Market Trends Card -->
+    <div class="market-card">
+      <h3><span>📊</span> Job Market Trends</h3>
+      <ul class="trend-list">
+        <li class="trend-item">
+          <span class="trend-emoji">⬆️</span>
+          <span>React & Next.js demand up 30%</span>
+        </li>
+        <li class="trend-item">
+          <span class="trend-emoji">🌐</span>
+          <span>Remote jobs make up 50% of postings</span>
+        </li>
+        <li class="trend-item">
+          <span class="trend-emoji">📦</span>
+          <span>AI skills appear in 60% of job ads</span>
+        </li>
+        <li class="trend-item">
+          <span class="trend-emoji">🔄</span>
+          <span>Average career change every 4 years</span>
+        </li>
+      </ul>
+    </div>
+    
+    <!-- Career Tips Card -->
+    <div class="market-card">
+      <h3><span>💡</span> Career Growth Tips</h3>
+      <ul class="tip-list">
+        <li class="tip-item">
+          <span class="tip-emoji">🔍</span>
+          <span>Apply within 72 hours of posting for 7x higher response rate</span>
+        </li>
+        <li class="tip-item">
+          <span class="tip-emoji">📢</span>
+          <span>Match resume keywords to job description to pass ATS systems</span>
+        </li>
+        <li class="tip-item">
+          <span class="tip-emoji">📈</span>
+          <span>Share posts or insights weekly on LinkedIn to stay visible</span>
+        </li>
+        <li class="tip-item">
+          <span class="tip-emoji">🤝</span>
+          <span>Connect with 3 new industry contacts monthly</span>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <script>
+    // Salary Explorer functionality
+    document.addEventListener('DOMContentLoaded', function() {
+      const roleSelector = document.getElementById('role-selector');
+      const webDevInfo = document.getElementById('web-developer-info');
+      const dataScientistInfo = document.getElementById('data-scientist-info');
+      const cybersecurityInfo = document.getElementById('cybersecurity-analyst-info');
+      
+      // Hide all salary info sections initially
+      const allSalaryInfos = document.querySelectorAll('.salary-info');
+      allSalaryInfos.forEach(info => {
+        info.classList.remove('active');
+      });
+      
+      roleSelector.addEventListener('change', function() {
+        // Hide all first
+        allSalaryInfos.forEach(info => {
+          info.classList.remove('active');
+        });
+        
+        // Show the selected one
+        const selectedValue = this.value;
+        if (selectedValue === 'web-developer') {
+          webDevInfo.classList.add('active');
+        } else if (selectedValue === 'data-scientist') {
+          dataScientistInfo.classList.add('active');
+        } else if (selectedValue === 'cybersecurity-analyst') {
+          cybersecurityInfo.classList.add('active');
+        }
+      });
+      
+      // Force layout calculation to ensure proper sizing
+      setTimeout(() => {
+        window.dispatchEvent(new Event('resize'));
+      }, 100);
+      
+      // Add animation for role items
+      const roleItems = document.querySelectorAll('.role-item');
+      roleItems.forEach(item => {
+        item.addEventListener('mouseenter', function() {
+          this.style.transition = 'transform 0.2s ease, background-color 0.2s ease';
+        });
+      });
+      
+      // Add animation for trend items with staggered delay
+      const trendItems = document.querySelectorAll('.trend-item');
+      trendItems.forEach((item, index) => {
+        item.style.animationDelay = `${index * 0.1}s`;
+        item.style.opacity = '0';
+        item.style.animation = 'fadeIn 0.5s forwards';
+      });
+      
+      // Define fadeIn animation
+      if (!document.querySelector('#career-animations')) {
+        const style = document.createElement('style');
+        style.id = 'career-animations';
+        style.textContent = `
+          @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+          }
+        `;
+        document.head.appendChild(style);
+      }
+    });
+  </script>
+</section>

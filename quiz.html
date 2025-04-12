@@ -9,358 +9,16 @@
     </style>
 </head>
 <body>
-    <!-- Radio button controls -->
-    <input type="radio" name="question" id="q1" checked class="tab-control">
-    <input type="radio" name="question" id="q2" class="tab-control">
-    <input type="radio" name="question" id="q3" class="tab-control">
-    <input type="radio" name="question" id="q4" class="tab-control">
-    <input type="radio" name="question" id="q5" class="tab-control">
-    <input type="radio" name="question" id="q6" class="tab-control">
-    <input type="radio" name="question" id="q7" class="tab-control">
-    <input type="radio" name="question" id="q8" class="tab-control">
-    <input type="radio" name="question" id="q9" class="tab-control">
-    <input type="radio" name="question" id="q10" class="tab-control">
-    <input type="radio" name="question" id="results" class="tab-control">
-
-    <!-- Add a form around the quiz container -->
-    <form action="/quiz" method="POST">
-        <div class="quiz-container">
-            <!-- Question 1 -->
-            <div class="question-slide" id="slide1">
-                <div class="question-counter">Question 1 of 10</div>
-                <div class="question-content">
-                    <h2>Which CSS property is used to create a flexible box layout?</h2>
-                    <div class="options">
-                        <div class="option-item">
-                            <input type="radio" name="a1" id="a1-1" value="1">
-                            <label for="a1-1">display: block</label>
-                        </div>
-                        <div class="option-item">
-                            <input type="radio" name="a1" id="a1-2" value="2">
-                            <label for="a1-2">display: flex</label>
-                        </div>
-                        <div class="option-item">
-                            <input type="radio" name="a1" id="a1-3" value="3">
-                            <label for="a1-3">display: grid</label>
-                        </div>
-                        <div class="option-item">
-                            <input type="radio" name="a1" id="a1-4" value="4">
-                            <label for="a1-4">display: inline</label>
-                        </div>
-                    </div>
-                    <div class="buttons">
-                        <div></div>
-                        <label for="q2" class="next-btn">Next</label>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Question 2 -->
-            <div class="question-slide" id="slide2">
-                <div class="question-counter">Question 2 of 10</div>
-                <div class="question-content">
-                    <h2>Which selector targets an element with the ID "header"?</h2>
-                    <div class="options">
-                        <div class="option-item">
-                            <input type="radio" name="a2" id="a2-1">
-                            <label for="a2-1">#header</label>
-                        </div>
-                        <div class="option-item">
-                            <input type="radio" name="a2" id="a2-2">
-                            <label for="a2-2">.header</label>
-                        </div>
-                        <div class="option-item">
-                            <input type="radio" name="a2" id="a2-3">
-                            <label for="a2-3">header</label>
-                        </div>
-                        <div class="option-item">
-                            <input type="radio" name="a2" id="a2-4">
-                            <label for="a2-4">*header</label>
-                        </div>
-                    </div>
-                    <div class="buttons">
-                        <label for="q1" class="prev-btn">Previous</label>
-                        <label for="q3" class="next-btn">Next</label>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Question 3 -->
-            <div class="question-slide" id="slide3">
-                <div class="question-counter">Question 3 of 10</div>
-                <div class="question-content">
-                    <h2>Which HTML5 element is used to define navigation links?</h2>
-                    <div class="options">
-                        <div class="option-item">
-                            <input type="radio" name="a3" id="a3-1">
-                            <label for="a3-1">&lt;navigation&gt;</label>
-                        </div>
-                        <div class="option-item">
-                            <input type="radio" name="a3" id="a3-2">
-                            <label for="a3-2">&lt;menu&gt;</label>
-                        </div>
-                        <div class="option-item">
-                            <input type="radio" name="a3" id="a3-3">
-                            <label for="a3-3">&lt;nav&gt;</label>
-                        </div>
-                        <div class="option-item">
-                            <input type="radio" name="a3" id="a3-4">
-                            <label for="a3-4">&lt;links&gt;</label>
-                        </div>
-                    </div>
-                    <div class="buttons">
-                        <label for="q2" class="prev-btn">Previous</label>
-                        <label for="q4" class="next-btn">Next</label>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Question 4 -->
-            <div class="question-slide" id="slide4">
-                <div class="question-counter">Question 4 of 10</div>
-                <div class="question-content">
-                    <h2>Which CSS property is used to create rounded corners?</h2>
-                    <div class="options">
-                        <div class="option-item">
-                            <input type="radio" name="a4" id="a4-1">
-                            <label for="a4-1">corner-radius</label>
-                        </div>
-                        <div class="option-item">
-                            <input type="radio" name="a4" id="a4-2">
-                            <label for="a4-2">round-corners</label>
-                        </div>
-                        <div class="option-item">
-                            <input type="radio" name="a4" id="a4-3">
-                            <label for="a4-3">border-radius</label>
-                        </div>
-                        <div class="option-item">
-                            <input type="radio" name="a4" id="a4-4">
-                            <label for="a4-4">border-corner</label>
-                        </div>
-                    </div>
-                    <div class="buttons">
-                        <label for="q3" class="prev-btn">Previous</label>
-                        <label for="q5" class="next-btn">Next</label>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Question 5 -->
-            <div class="question-slide" id="slide5">
-                <div class="question-counter">Question 5 of 10</div>
-                <div class="question-content">
-                    <h2>Which attribute makes a form submit to a specific URL?</h2>
-                    <div class="options">
-                        <div class="option-item">
-                            <input type="radio" name="a5" id="a5-1">
-                            <label for="a5-1">url</label>
-                        </div>
-                        <div class="option-item">
-                            <input type="radio" name="a5" id="a5-2">
-                            <label for="a5-2">action</label>
-                        </div>
-                        <div class="option-item">
-                            <input type="radio" name="a5" id="a5-3">
-                            <label for="a5-3">method</label>
-                        </div>
-                        <div class="option-item">
-                            <input type="radio" name="a5" id="a5-4">
-                            <label for="a5-4">target</label>
-                        </div>
-                    </div>
-                    <div class="buttons">
-                        <label for="q4" class="prev-btn">Previous</label>
-                        <label for="q6" class="next-btn">Next</label>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Question 6 -->
-            <div class="question-slide" id="slide6">
-                <div class="question-counter">Question 6 of 10</div>
-                <div class="question-content">
-                    <h2>What CSS unit is relative to the font-size of the element?</h2>
-                    <div class="options">
-                        <div class="option-item">
-                            <input type="radio" name="a6" id="a6-1">
-                            <label for="a6-1">px</label>
-                        </div>
-                        <div class="option-item">
-                            <input type="radio" name="a6" id="a6-2">
-                            <label for="a6-2">%</label>
-                        </div>
-                        <div class="option-item">
-                            <input type="radio" name="a6" id="a6-3">
-                            <label for="a6-3">em</label>
-                        </div>
-                        <div class="option-item">
-                            <input type="radio" name="a6" id="a6-4">
-                            <label for="a6-4">vh</label>
-                        </div>
-                    </div>
-                    <div class="buttons">
-                        <label for="q5" class="prev-btn">Previous</label>
-                        <label for="q7" class="next-btn">Next</label>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Question 7 -->
-            <div class="question-slide" id="slide7">
-                <div class="question-counter">Question 7 of 10</div>
-                <div class="question-content">
-                    <h2>Which property specifies the spacing between lines of text?</h2>
-                    <div class="options">
-                        <div class="option-item">
-                            <input type="radio" name="a7" id="a7-1">
-                            <label for="a7-1">text-spacing</label>
-                        </div>
-                        <div class="option-item">
-                            <input type="radio" name="a7" id="a7-2">
-                            <label for="a7-2">line-height</label>
-                        </div>
-                        <div class="option-item">
-                            <input type="radio" name="a7" id="a7-3">
-                            <label for="a7-3">text-height</label>
-                        </div>
-                        <div class="option-item">
-                            <input type="radio" name="a7" id="a7-4">
-                            <label for="a7-4">line-spacing</label>
-                        </div>
-                    </div>
-                    <div class="buttons">
-                        <label for="q6" class="prev-btn">Previous</label>
-                        <label for="q8" class="next-btn">Next</label>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Question 8 -->
-            <div class="question-slide" id="slide8">
-                <div class="question-counter">Question 8 of 10</div>
-                <div class="question-content">
-                    <h2>What is the correct way to add a comment in CSS?</h2>
-                    <div class="options">
-                        <div class="option-item">
-                            <input type="radio" name="a8" id="a8-1">
-                            <label for="a8-1">// This is a comment</label>
-                        </div>
-                        <div class="option-item">
-                            <input type="radio" name="a8" id="a8-2">
-                            <label for="a8-2">/* This is a comment */</label>
-                        </div>
-                        <div class="option-item">
-                            <input type="radio" name="a8" id="a8-3">
-                            <label for="a8-3">&lt;!-- This is a comment --&gt;</label>
-                        </div>
-                        <div class="option-item">
-                            <input type="radio" name="a8" id="a8-4">
-                            <label for="a8-4"># This is a comment</label>
-                        </div>
-                    </div>
-                    <div class="buttons">
-                        <label for="q7" class="prev-btn">Previous</label>
-                        <label for="q9" class="next-btn">Next</label>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Question 9 -->
-            <div class="question-slide" id="slide9">
-                <div class="question-counter">Question 9 of 10</div>
-                <div class="question-content">
-                    <h2>Which HTML tag is used to define an unordered list?</h2>
-                    <div class="options">
-                        <div class="option-item">
-                            <input type="radio" name="a9" id="a9-1">
-                            <label for="a9-1">&lt;ul&gt;</label>
-                        </div>
-                        <div class="option-item">
-                            <input type="radio" name="a9" id="a9-2">
-                            <label for="a9-2">&lt;ol&gt;</label>
-                        </div>
-                        <div class="option-item">
-                            <input type="radio" name="a9" id="a9-3">
-                            <label for="a9-3">&lt;list&gt;</label>
-                        </div>
-                        <div class="option-item">
-                            <input type="radio" name="a9" id="a9-4">
-                            <label for="a9-4">&lt;dl&gt;</label>
-                        </div>
-                    </div>
-                    <div class="buttons">
-                        <label for="q8" class="prev-btn">Previous</label>
-                        <label for="q10" class="next-btn">Next</label>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Question 10 -->
-            <div class="question-slide" id="slide10">
-                <div class="question-counter">Question 10 of 10</div>
-                <div class="question-content">
-                    <h2>Which of these is a pseudo-class in CSS?</h2>
-                    <div class="options">
-                        <div class="option-item">
-                            <input type="radio" name="a10" id="a10-1">
-                            <label for="a10-1">:before</label>
-                        </div>
-                        <div class="option-item">
-                            <input type="radio" name="a10" id="a10-2">
-                            <label for="a10-2">:hover</label>
-                        </div>
-                        <div class="option-item">
-                            <input type="radio" name="a10" id="a10-3">
-                            <label for="a10-3">::first-line</label>
-                        </div>
-                        <div class="option-item">
-                            <input type="radio" name="a10" id="a10-4">
-                            <label for="a10-4">::selection</label>
-                        </div>
-                    </div>
-                    <div class="buttons">
-                        <label for="q9" class="prev-btn">Previous</label>
-                        <div class="buttons centered">
-                            <input type="hidden" name="question_id" value="10">
-                            <input type="submit" name="next_question" value="results" class="next-btn">
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Results -->
-            <div class="question-slide" id="slide-results">
-                <div class="question-content results">
-                    <h2>Thank you for completing the quiz!</h2>
-                    <div class="score">7/10</div>
-                    <p>Great effort! Here's your performance breakdown:</p>
-                    
-                    <div class="feedback">
-                        <h3>Areas for Improvement</h3>
-                        <p>Based on your answers, we recommend focusing on:</p>
-                        <ul>
-                            <li>CSS Selectors - particularly pseudo-elements vs pseudo-classes</li>
-                            <li>HTML5 Semantic Elements - understanding proper usage</li>
-                            <li>CSS Units - practicing with relative vs absolute units</li>
-                        </ul>
-                    </div>
-                    
-                    <div class="feedback">
-                        <h3>Learning Resources</h3>
-                        <ul>
-                            <li>Complete the CSS Grid tutorial on MDN Web Docs</li>
-                            <li>Practice building responsive layouts with Flexbox</li>
-                            <li>Take the free HTML5 certification on W3Schools</li>
-                        </ul>
-                    </div>
-                    
-                    <div class="buttons centered">
-                        <label for="q1" class="restart-btn">Start Again</label>
-                    </div>
-                </div>
-            </div>
+    <div class="quiz-container">
+        <div id="quiz-content"></div>
+        <div class="buttons centered" id="nav-buttons" style="margin-top: 20px;">
+          <button id="prev-btn" class="prev-btn" style="display: none;">Previous</button>
+          <button id="next-btn" class="next-btn">Next</button>
         </div>
-    </form>
+        <div id="feedback" class="feedback" style="display: none; margin-top: 20px;"></div>
+      </div>
+      
+
 
 <style>
 /* Base styles */
@@ -561,5 +219,173 @@ h2 {
     }
 }
 </style>
+<script>
+    // From earlier:
+    const quizData = [
+  {
+    id: 1,
+    question: "Which CSS property is used to create a flexible box layout?",
+    options: ["display: block", "display: flex", "display: grid", "display: inline"],
+    correct: 1,
+    explanation: "The 'display: flex' property establishes a flex container, enabling a flex context for all its direct children."
+  },
+  {
+    id: 2,
+    question: "Which selector targets an element with the ID 'header'?",
+    options: ["#header", ".header", "header", "*header"],
+    correct: 0,
+    explanation: "In CSS, the '#' symbol is used to select elements by their ID attribute."
+  },
+  {
+    id: 3,
+    question: "Which HTML5 element is used to define navigation links?",
+    options: ["<navigation>", "<menu>", "<nav>", "<links>"],
+    correct: 2,
+    explanation: "The <nav> element is a semantic HTML5 tag specifically designed for navigation sections."
+  },
+  {
+    id: 4,
+    question: "Which CSS property is used to create rounded corners?",
+    options: ["corner-radius", "round-corners", "border-radius", "border-corner"],
+    correct: 2,
+    explanation: "The 'border-radius' property allows you to create rounded corners on elements."
+  },
+  {
+    id: 5,
+    question: "Which attribute makes a form submit to a specific URL?",
+    options: ["url", "action", "method", "target"],
+    correct: 1,
+    explanation: "The 'action' attribute specifies where to send the form data when submitted."
+  },
+  {
+    id: 6,
+    question: "What CSS unit is relative to the font-size of the element?",
+    options: ["px", "%", "em", "vh"],
+    correct: 2,
+    explanation: "The 'em' unit is relative to the font-size of the element (e.g., 2em means 2 times the font size)."
+  },
+  {
+    id: 7,
+    question: "Which property specifies the spacing between lines of text?",
+    options: ["text-spacing", "line-height", "text-height", "line-spacing"],
+    correct: 1,
+    explanation: "The 'line-height' property sets the height of a line box, controlling the spacing between lines of text."
+  },
+  {
+    id: 8,
+    question: "What is the correct way to add a comment in CSS?",
+    options: ["// This is a comment", "/* This is a comment */", "<!-- This is a comment -->", "# This is a comment"],
+    correct: 1,
+    explanation: "Comments in CSS are made with /* comment text */ syntax, allowing multi-line comments."
+  },
+  {
+    id: 9,
+    question: "Which HTML tag is used to define an unordered list?",
+    options: ["<ul>", "<ol>", "<list>", "<dl>"],
+    correct: 0,
+    explanation: "The <ul> (unordered list) tag is used to create a bulleted list in HTML."
+  },
+  {
+    id: 10,
+    question: "Which of these is a pseudo-class in CSS?",
+    options: [":before", ":hover", "::first-line", "::selection"],
+    correct: 1,
+    explanation: "':hover' is a pseudo-class that selects elements when the mouse cursor is positioned over them. ':before' is actually a pseudo-element written as '::before' in CSS3, and '::first-line' and '::selection' are both pseudo-elements (note the double colons)."
+  }
+];
+let currentQuestion = 0;
+let userAnswers = [];
+let allowNext = false; // block next until user sees explanation
+
+const quizContent = document.getElementById("quiz-content");
+const feedback = document.getElementById("feedback");
+const prevBtn = document.getElementById("prev-btn");
+const nextBtn = document.getElementById("next-btn");
+
+function loadQuestion(index) {
+  const q = quizData[index];
+
+  const optionsHTML = q.options.map((opt, i) => `
+    <div class="option-item">
+      <input type="radio" name="option" id="option-${i}" value="${i}" ${userAnswers[index] === i ? 'checked' : ''}>
+      <label for="option-${i}">${opt}</label>
+    </div>
+  `).join("");
+
+  quizContent.innerHTML = `
+    <div class="question-counter">Question ${q.id} of ${quizData.length}</div>
+    <h2>${q.question}</h2>
+    <div class="options">${optionsHTML}</div>
+  `;
+
+  feedback.style.display = "none";
+  prevBtn.style.display = index > 0 ? "inline-block" : "none";
+  nextBtn.innerText = index === quizData.length - 1 ? "Finish" : "Next";
+  allowNext = false;
+}
+
+function checkAnswer() {
+  const selected = document.querySelector('input[name="option"]:checked');
+  if (!selected) {
+    alert("Please select an answer.");
+    return false;
+  }
+
+  const answerIndex = parseInt(selected.value);
+  userAnswers[currentQuestion] = answerIndex;
+
+  const isCorrect = answerIndex === quizData[currentQuestion].correct;
+
+  if (isCorrect) {
+    feedback.innerHTML = `<h3>✅ Correct!</h3>`;
+  } else {
+    feedback.innerHTML = `
+      <h3>❌ Incorrect</h3>
+      <p><strong>Explanation:</strong> ${quizData[currentQuestion].explanation}</p>
+    `;
+  }
+
+  feedback.style.display = "block";
+  allowNext = true;
+  return true;
+}
+
+nextBtn.addEventListener("click", () => {
+  if (!allowNext) {
+    checkAnswer(); // Check first before moving forward
+    return;
+  }
+
+  if (currentQuestion < quizData.length - 1) {
+    currentQuestion++;
+    loadQuestion(currentQuestion);
+  } else {
+    showFinalResults();
+  }
+});
+
+prevBtn.addEventListener("click", () => {
+  currentQuestion--;
+  loadQuestion(currentQuestion);
+});
+
+function showFinalResults() {
+  let correct = 0;
+  quizData.forEach((q, i) => {
+    if (userAnswers[i] === q.correct) correct++;
+  });
+
+  quizContent.innerHTML = `
+    <h2>🎉 Quiz Completed!</h2>
+    <div class="score">${correct} / ${quizData.length}</div>
+    <p>Well done! You can refresh the page to try again.</p>
+  `;
+  feedback.style.display = "none";
+  document.getElementById("nav-buttons").style.display = "none";
+}
+
+loadQuestion(currentQuestion);
+    </script>
+    
 </body>
 </html>
