@@ -21,7 +21,14 @@ def analyze_text():
     if not text:
         return jsonify({"error": "No input provided"}), 400
 
-    prompt = f"Please review and provide feedback on this {input_type}:\n\n{text}"
+    prompt = (
+        f"You're an expert communication coach. "
+        f"Please provide a brief (3-4 points) professional review of the following {input_type}.each point should be in a new line and should be 15 words long"
+        f"Focus on tone, clarity, grammar, and effectiveness. each point should be in a new line. and begin with a number\n\n"
+        f"---\n{text}\n---"
+        f"Be specific but concise.\n\n"
+        f"---\n{text}\n---"
+    )
 
     try:
         response = model.generate_content(prompt)
