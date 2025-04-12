@@ -661,7 +661,70 @@
 
     // Handle form submission
     document.getElementById('upload-form').addEventListener('submit', function(e) {
+      e.preventDefault(); // Prevent default form submission
+      
+      // Show loading overlay
       loadingOverlay.classList.add('active');
+      
+      const file = fileInput.files[0];
+      if (!file) {
+        alert("Please select a file first");
+        loadingOverlay.classList.remove('active');
+        return;
+      }
+      
+      const formData = new FormData(form);
+      
+      fetch('/upload', {
+        method: 'POST',
+        body: formData
+      })
+      .then(response => {
+        if (!response.ok) {
+          throw new Error('Upload failed');
+        }
+        return response.json();
+      })
+      .then(data => {
+        // Hide loading overlay
+        loadingOverlay.classList.remove('active');
+        
+        // Hide upload section and show feedback section
+        uploadInterface.style.display = 'none';
+        feedbackInterface.classList.add('active');
+        
+        // Update file name in preview
+        previewFileName.textContent = file.name;
+        
+        // Update resume strength percentage
+        document.querySelector('.strength-value').style.width = data.score + '%';
+        document.querySelector('.feedback-strength span:last-child').textContent = data.score + '%';
+        
+        // Update content improvements
+        updateFeedbackSection('Content Improvements', data.content_improvements);
+        
+        // Update formatting suggestions
+        updateFeedbackSection('Formatting Suggestions', data.formatting_suggestions);
+        
+        // Update ATS optimization
+        updateFeedbackSection('ATS Optimization', data.ats_optimization);
+        
+        // Display the uploaded image in the preview section
+        const previewContent = document.querySelector('.preview-content');
+        const imgElement = document.createElement('img');
+        imgElement.src = URL.createObjectURL(file); // Create a URL for the uploaded file
+        imgElement.style.width = '100%'; // Adjust as needed
+        imgElement.style.height = 'auto'; // Maintain aspect ratio
+        previewContent.innerHTML = ''; // Clear previous content
+        previewContent.appendChild(imgElement); // Add the image to the preview
+      })
+      .catch(error => {
+        // Hide loading overlay
+        loadingOverlay.classList.remove('active');
+        
+        alert("There was an error processing your resume: " + error.message);
+        console.error(error);
+      });
     });
 
     // Back button click
@@ -691,98 +754,7 @@
         previewFileName.textContent = e.dataTransfer.files[0].name;
       }
     });
-    form.addEventListener('submit', function(e) {
-  e.preventDefault(); // Prevent default form submission
-  
-  // Show loading overlay
-  loadingOverlay.classList.add('active');
-  
-  const file = fileInput.files[0];
-  if (!file) {
-    alert("Please select a file first");
-    loadingOverlay.classList.remove('active');
-    return;
-  }
-  
-  const formData = new FormData(form);
-  
-  fetch('/upload', {
-    method: 'POST',
-    body: formData
-  })
-  .then(response => {
-    if (!response.ok) {
-      throw new Error('Upload failed');
-    }
-    return response.json();
-  })
-  .then(data => {
-    // Hide loading overlay
-    loadingOverlay.classList.remove('active');
-    
-    // Hide upload section and show feedback section
-    uploadInterface.style.display = 'none';
-    feedbackInterface.classList.add('active');
-    
-    // Update file name in preview
-    previewFileName.textContent = file.name;
-    
-    // If you want to update the feedback content with the real data from the backend
-    if (data) {
-      // Update resume strength percentage
-      document.querySelector('.strength-value').style.width = data.score + '%';
-      document.querySelector('.feedback-strength span:last-child').textContent = data.score + '%';
-      
-      // Update content improvements
-      updateFeedbackSection('Content Improvements', data.content_improvements);
-      
-      // Update formatting suggestions
-      updateFeedbackSection('Formatting Suggestions', data.formatting_suggestions);
-      
-      // Update ATS optimization
-      updateFeedbackSection('ATS Optimization', data.ats_optimization);
-    }
-  })
-  .catch(error => {
-    // Hide loading overlay
-    loadingOverlay.classList.remove('active');
-    
-    alert("There was an error processing your resume: " + error.message);
-    console.error(error);
-  });
-});
 
-// Add this helper function to update feedback sections
-function updateFeedbackSection(sectionTitle, items) {
-  // Find the section with the matching title
-  const sections = document.querySelectorAll('.feedback-section');
-  let targetSection;
-  
-  for (const section of sections) {
-    if (section.querySelector('h4').textContent.trim() === sectionTitle) {
-      targetSection = section;
-      break;
-    }
-  }
-  
-  if (!targetSection || !items || !items.length) return;
-  
-  // Clear existing feedback items
-  const feedbackContent = targetSection.querySelectorAll('.feedback-item');
-  feedbackContent.forEach(item => item.remove());
-  
-  // Add new feedback items
-  items.forEach(text => {
-    const itemDiv = document.createElement('div');
-    itemDiv.className = 'feedback-item';
-    
-    const paragraph = document.createElement('p');
-    paragraph.textContent = text;
-    
-    itemDiv.appendChild(paragraph);
-    targetSection.appendChild(itemDiv);
-  });
-}
     // Make only the upload area (but NOT the button) clickable
     uploadArea.addEventListener('click', function(e) {
       // Check if the click is on the browse button or its children
@@ -790,7 +762,38 @@ function updateFeedbackSection(sectionTitle, items) {
         fileInput.click();
       }
     });
-    
+
+    // Update this function to populate the feedback sections
+    function updateFeedbackSection(sectionTitle, items) {
+      // Find the section with the matching title
+      const sections = document.querySelectorAll('.feedback-section');
+      let targetSection;
+      
+      for (const section of sections) {
+        if (section.querySelector('h4').textContent.trim() === sectionTitle) {
+          targetSection = section;
+          break;
+        }
+      }
+      
+      if (!targetSection || !items || !items.length) return;
+      
+      // Clear existing feedback items
+      const feedbackContent = targetSection.querySelectorAll('.feedback-item');
+      feedbackContent.forEach(item => item.remove());
+      
+      // Add new feedback items
+      items.forEach(text => {
+        const itemDiv = document.createElement('div');
+        itemDiv.className = 'feedback-item';
+        
+        const paragraph = document.createElement('p');
+        paragraph.textContent = text;
+        
+        itemDiv.appendChild(paragraph);
+        targetSection.appendChild(itemDiv);
+      });
+    }
   </script>
 </body>
 </html>
