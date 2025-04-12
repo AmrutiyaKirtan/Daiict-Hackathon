@@ -26,6 +26,10 @@
             box-sizing: border-box;
         }
         
+        html {
+            scroll-behavior: smooth; /* Enable smooth scrolling */
+        }
+        
         body {
             font-family: 'Inter', sans-serif;
             background-color: var(--dark);
@@ -327,10 +331,6 @@
             text-decoration: none;
         }
         
-        .footer-logo span {
-            color: var(--primary);
-        }
-        
         .footer-links {
             display: flex;
             gap: 1.5rem;
@@ -382,7 +382,7 @@
         <div class="hero-content">
             <h1>Find Your Career Path with AI</h1>
             <p>Discover opportunities tailored to your skills and passion</p>
-            <a href="#" class="btn">Get Started</a>
+            <a href="#features" class="btn">Get Started</a> <!-- Updated href to point to features section -->
         </div>
     </section>
     
@@ -395,7 +395,7 @@
     </section>
     
     <!-- Features Section -->
-    <section class="features">
+    <section class="features" id="features"> <!-- Added id here -->
         <div class="container">
             <h2>Our Features</h2>
             <div class="features-grid">
@@ -406,7 +406,7 @@
                 </div>
                 <div class="feature-card">
                     <div class="feature-icon">📄</div>
-                    <h3>Resume Feedback with AI</h3>
+                    <a href="resume_upload.html"><h3>Resume Feedback with AI</h3></a>
                     <p>Get personalized suggestions to improve your resume and stand out to potential employers.</p>
                 </div>
                 <div class="feature-card">
@@ -465,8 +465,7 @@
         </div>
     </section>
     
-    <!-- Footer -->
-    <footer class="footer">
+    <!-- Footer -->    <footer class="footer">
         <div class="container">
             <div class="footer-content">
                 <a href="#" class="footer-logo">Career<span>AI</span></a>

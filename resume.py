@@ -1,3 +1,4 @@
+
 from flask import Flask, request, render_template, jsonify, send_from_directory
 from flask_cors import CORS
 from google import genai
@@ -59,7 +60,7 @@ def analyze_resume(image):
     2. Formatting Suggestions (with 3-4 bullet points)
     3. ATS Optimization (with 3-4 bullet points)
 
-    Also calculate a "Resume Strength" percentage score from 0-100% based on the overall quality.
+    Also calculate a "Resume Strength" percentage score from 0-100 based on the overall quality.
     """
 
     try:
@@ -216,7 +217,7 @@ def serve_static(path):
 
 if __name__ == '__main__':
     # You can specify the port when running the app
-    # Default to port 5000 if no port is specified
+    # Default to port 3000 if no port is specified
     import sys
     port = int(sys.argv[1]) if len(sys.argv) > 1 else 3000
     
