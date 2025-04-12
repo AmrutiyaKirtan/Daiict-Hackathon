@@ -22,340 +22,345 @@
     <input type="radio" name="question" id="q10" class="tab-control">
     <input type="radio" name="question" id="results" class="tab-control">
 
-    <div class="quiz-container">
-        <!-- Question 1 -->
-        <div class="question-slide" id="slide1">
-            <div class="question-counter">Question 1 of 10</div>
-            <div class="question-content">
-                <h2>Which CSS property is used to create a flexible box layout?</h2>
-                <div class="options">
-                    <div class="option-item">
-                        <input type="radio" name="a1" id="a1-1">
-                        <label for="a1-1">display: block</label>
+    <!-- Add a form around the quiz container -->
+    <form action="/quiz" method="POST">
+        <div class="quiz-container">
+            <!-- Question 1 -->
+            <div class="question-slide" id="slide1">
+                <div class="question-counter">Question 1 of 10</div>
+                <div class="question-content">
+                    <h2>Which CSS property is used to create a flexible box layout?</h2>
+                    <div class="options">
+                        <div class="option-item">
+                            <input type="radio" name="a1" id="a1-1" value="1">
+                            <label for="a1-1">display: block</label>
+                        </div>
+                        <div class="option-item">
+                            <input type="radio" name="a1" id="a1-2" value="2">
+                            <label for="a1-2">display: flex</label>
+                        </div>
+                        <div class="option-item">
+                            <input type="radio" name="a1" id="a1-3" value="3">
+                            <label for="a1-3">display: grid</label>
+                        </div>
+                        <div class="option-item">
+                            <input type="radio" name="a1" id="a1-4" value="4">
+                            <label for="a1-4">display: inline</label>
+                        </div>
                     </div>
-                    <div class="option-item">
-                        <input type="radio" name="a1" id="a1-2">
-                        <label for="a1-2">display: flex</label>
+                    <div class="buttons">
+                        <div></div>
+                        <label for="q2" class="next-btn">Next</label>
                     </div>
-                    <div class="option-item">
-                        <input type="radio" name="a1" id="a1-3">
-                        <label for="a1-3">display: grid</label>
-                    </div>
-                    <div class="option-item">
-                        <input type="radio" name="a1" id="a1-4">
-                        <label for="a1-4">display: inline</label>
-                    </div>
-                </div>
-                <div class="buttons">
-                    <div></div>
-                    <label for="q2" class="next-btn">Next</label>
                 </div>
             </div>
-        </div>
 
-        <!-- Question 2 -->
-        <div class="question-slide" id="slide2">
-            <div class="question-counter">Question 2 of 10</div>
-            <div class="question-content">
-                <h2>Which selector targets an element with the ID "header"?</h2>
-                <div class="options">
-                    <div class="option-item">
-                        <input type="radio" name="a2" id="a2-1">
-                        <label for="a2-1">#header</label>
+            <!-- Question 2 -->
+            <div class="question-slide" id="slide2">
+                <div class="question-counter">Question 2 of 10</div>
+                <div class="question-content">
+                    <h2>Which selector targets an element with the ID "header"?</h2>
+                    <div class="options">
+                        <div class="option-item">
+                            <input type="radio" name="a2" id="a2-1">
+                            <label for="a2-1">#header</label>
+                        </div>
+                        <div class="option-item">
+                            <input type="radio" name="a2" id="a2-2">
+                            <label for="a2-2">.header</label>
+                        </div>
+                        <div class="option-item">
+                            <input type="radio" name="a2" id="a2-3">
+                            <label for="a2-3">header</label>
+                        </div>
+                        <div class="option-item">
+                            <input type="radio" name="a2" id="a2-4">
+                            <label for="a2-4">*header</label>
+                        </div>
                     </div>
-                    <div class="option-item">
-                        <input type="radio" name="a2" id="a2-2">
-                        <label for="a2-2">.header</label>
+                    <div class="buttons">
+                        <label for="q1" class="prev-btn">Previous</label>
+                        <label for="q3" class="next-btn">Next</label>
                     </div>
-                    <div class="option-item">
-                        <input type="radio" name="a2" id="a2-3">
-                        <label for="a2-3">header</label>
-                    </div>
-                    <div class="option-item">
-                        <input type="radio" name="a2" id="a2-4">
-                        <label for="a2-4">*header</label>
-                    </div>
-                </div>
-                <div class="buttons">
-                    <label for="q1" class="prev-btn">Previous</label>
-                    <label for="q3" class="next-btn">Next</label>
                 </div>
             </div>
-        </div>
 
-        <!-- Question 3 -->
-        <div class="question-slide" id="slide3">
-            <div class="question-counter">Question 3 of 10</div>
-            <div class="question-content">
-                <h2>Which HTML5 element is used to define navigation links?</h2>
-                <div class="options">
-                    <div class="option-item">
-                        <input type="radio" name="a3" id="a3-1">
-                        <label for="a3-1">&lt;navigation&gt;</label>
+            <!-- Question 3 -->
+            <div class="question-slide" id="slide3">
+                <div class="question-counter">Question 3 of 10</div>
+                <div class="question-content">
+                    <h2>Which HTML5 element is used to define navigation links?</h2>
+                    <div class="options">
+                        <div class="option-item">
+                            <input type="radio" name="a3" id="a3-1">
+                            <label for="a3-1">&lt;navigation&gt;</label>
+                        </div>
+                        <div class="option-item">
+                            <input type="radio" name="a3" id="a3-2">
+                            <label for="a3-2">&lt;menu&gt;</label>
+                        </div>
+                        <div class="option-item">
+                            <input type="radio" name="a3" id="a3-3">
+                            <label for="a3-3">&lt;nav&gt;</label>
+                        </div>
+                        <div class="option-item">
+                            <input type="radio" name="a3" id="a3-4">
+                            <label for="a3-4">&lt;links&gt;</label>
+                        </div>
                     </div>
-                    <div class="option-item">
-                        <input type="radio" name="a3" id="a3-2">
-                        <label for="a3-2">&lt;menu&gt;</label>
+                    <div class="buttons">
+                        <label for="q2" class="prev-btn">Previous</label>
+                        <label for="q4" class="next-btn">Next</label>
                     </div>
-                    <div class="option-item">
-                        <input type="radio" name="a3" id="a3-3">
-                        <label for="a3-3">&lt;nav&gt;</label>
-                    </div>
-                    <div class="option-item">
-                        <input type="radio" name="a3" id="a3-4">
-                        <label for="a3-4">&lt;links&gt;</label>
-                    </div>
-                </div>
-                <div class="buttons">
-                    <label for="q2" class="prev-btn">Previous</label>
-                    <label for="q4" class="next-btn">Next</label>
                 </div>
             </div>
-        </div>
 
-        <!-- Question 4 -->
-        <div class="question-slide" id="slide4">
-            <div class="question-counter">Question 4 of 10</div>
-            <div class="question-content">
-                <h2>Which CSS property is used to create rounded corners?</h2>
-                <div class="options">
-                    <div class="option-item">
-                        <input type="radio" name="a4" id="a4-1">
-                        <label for="a4-1">corner-radius</label>
+            <!-- Question 4 -->
+            <div class="question-slide" id="slide4">
+                <div class="question-counter">Question 4 of 10</div>
+                <div class="question-content">
+                    <h2>Which CSS property is used to create rounded corners?</h2>
+                    <div class="options">
+                        <div class="option-item">
+                            <input type="radio" name="a4" id="a4-1">
+                            <label for="a4-1">corner-radius</label>
+                        </div>
+                        <div class="option-item">
+                            <input type="radio" name="a4" id="a4-2">
+                            <label for="a4-2">round-corners</label>
+                        </div>
+                        <div class="option-item">
+                            <input type="radio" name="a4" id="a4-3">
+                            <label for="a4-3">border-radius</label>
+                        </div>
+                        <div class="option-item">
+                            <input type="radio" name="a4" id="a4-4">
+                            <label for="a4-4">border-corner</label>
+                        </div>
                     </div>
-                    <div class="option-item">
-                        <input type="radio" name="a4" id="a4-2">
-                        <label for="a4-2">round-corners</label>
+                    <div class="buttons">
+                        <label for="q3" class="prev-btn">Previous</label>
+                        <label for="q5" class="next-btn">Next</label>
                     </div>
-                    <div class="option-item">
-                        <input type="radio" name="a4" id="a4-3">
-                        <label for="a4-3">border-radius</label>
-                    </div>
-                    <div class="option-item">
-                        <input type="radio" name="a4" id="a4-4">
-                        <label for="a4-4">border-corner</label>
-                    </div>
-                </div>
-                <div class="buttons">
-                    <label for="q3" class="prev-btn">Previous</label>
-                    <label for="q5" class="next-btn">Next</label>
                 </div>
             </div>
-        </div>
 
-        <!-- Question 5 -->
-        <div class="question-slide" id="slide5">
-            <div class="question-counter">Question 5 of 10</div>
-            <div class="question-content">
-                <h2>Which attribute makes a form submit to a specific URL?</h2>
-                <div class="options">
-                    <div class="option-item">
-                        <input type="radio" name="a5" id="a5-1">
-                        <label for="a5-1">url</label>
+            <!-- Question 5 -->
+            <div class="question-slide" id="slide5">
+                <div class="question-counter">Question 5 of 10</div>
+                <div class="question-content">
+                    <h2>Which attribute makes a form submit to a specific URL?</h2>
+                    <div class="options">
+                        <div class="option-item">
+                            <input type="radio" name="a5" id="a5-1">
+                            <label for="a5-1">url</label>
+                        </div>
+                        <div class="option-item">
+                            <input type="radio" name="a5" id="a5-2">
+                            <label for="a5-2">action</label>
+                        </div>
+                        <div class="option-item">
+                            <input type="radio" name="a5" id="a5-3">
+                            <label for="a5-3">method</label>
+                        </div>
+                        <div class="option-item">
+                            <input type="radio" name="a5" id="a5-4">
+                            <label for="a5-4">target</label>
+                        </div>
                     </div>
-                    <div class="option-item">
-                        <input type="radio" name="a5" id="a5-2">
-                        <label for="a5-2">action</label>
-                    </div>
-                    <div class="option-item">
-                        <input type="radio" name="a5" id="a5-3">
-                        <label for="a5-3">method</label>
-                    </div>
-                    <div class="option-item">
-                        <input type="radio" name="a5" id="a5-4">
-                        <label for="a5-4">target</label>
+                    <div class="buttons">
+                        <label for="q4" class="prev-btn">Previous</label>
+                        <label for="q6" class="next-btn">Next</label>
                     </div>
                 </div>
-                <div class="buttons">
-                    <label for="q4" class="prev-btn">Previous</label>
-                    <label for="q6" class="next-btn">Next</label>
-                </div>
             </div>
-        </div>
 
-        <!-- Question 6-10 and Results to be continued in Part 2 -->
-    <!-- Question 6 -->
-    <div class="question-slide" id="slide6">
-        <div class="question-counter">Question 6 of 10</div>
-        <div class="question-content">
-            <h2>What CSS unit is relative to the font-size of the element?</h2>
-            <div class="options">
-                <div class="option-item">
-                    <input type="radio" name="a6" id="a6-1">
-                    <label for="a6-1">px</label>
-                </div>
-                <div class="option-item">
-                    <input type="radio" name="a6" id="a6-2">
-                    <label for="a6-2">%</label>
-                </div>
-                <div class="option-item">
-                    <input type="radio" name="a6" id="a6-3">
-                    <label for="a6-3">em</label>
-                </div>
-                <div class="option-item">
-                    <input type="radio" name="a6" id="a6-4">
-                    <label for="a6-4">vh</label>
+            <!-- Question 6 -->
+            <div class="question-slide" id="slide6">
+                <div class="question-counter">Question 6 of 10</div>
+                <div class="question-content">
+                    <h2>What CSS unit is relative to the font-size of the element?</h2>
+                    <div class="options">
+                        <div class="option-item">
+                            <input type="radio" name="a6" id="a6-1">
+                            <label for="a6-1">px</label>
+                        </div>
+                        <div class="option-item">
+                            <input type="radio" name="a6" id="a6-2">
+                            <label for="a6-2">%</label>
+                        </div>
+                        <div class="option-item">
+                            <input type="radio" name="a6" id="a6-3">
+                            <label for="a6-3">em</label>
+                        </div>
+                        <div class="option-item">
+                            <input type="radio" name="a6" id="a6-4">
+                            <label for="a6-4">vh</label>
+                        </div>
+                    </div>
+                    <div class="buttons">
+                        <label for="q5" class="prev-btn">Previous</label>
+                        <label for="q7" class="next-btn">Next</label>
+                    </div>
                 </div>
             </div>
-            <div class="buttons">
-                <label for="q5" class="prev-btn">Previous</label>
-                <label for="q7" class="next-btn">Next</label>
-            </div>
-        </div>
-    </div>
 
-    <!-- Question 7 -->
-    <div class="question-slide" id="slide7">
-        <div class="question-counter">Question 7 of 10</div>
-        <div class="question-content">
-            <h2>Which property specifies the spacing between lines of text?</h2>
-            <div class="options">
-                <div class="option-item">
-                    <input type="radio" name="a7" id="a7-1">
-                    <label for="a7-1">text-spacing</label>
-                </div>
-                <div class="option-item">
-                    <input type="radio" name="a7" id="a7-2">
-                    <label for="a7-2">line-height</label>
-                </div>
-                <div class="option-item">
-                    <input type="radio" name="a7" id="a7-3">
-                    <label for="a7-3">text-height</label>
-                </div>
-                <div class="option-item">
-                    <input type="radio" name="a7" id="a7-4">
-                    <label for="a7-4">line-spacing</label>
+            <!-- Question 7 -->
+            <div class="question-slide" id="slide7">
+                <div class="question-counter">Question 7 of 10</div>
+                <div class="question-content">
+                    <h2>Which property specifies the spacing between lines of text?</h2>
+                    <div class="options">
+                        <div class="option-item">
+                            <input type="radio" name="a7" id="a7-1">
+                            <label for="a7-1">text-spacing</label>
+                        </div>
+                        <div class="option-item">
+                            <input type="radio" name="a7" id="a7-2">
+                            <label for="a7-2">line-height</label>
+                        </div>
+                        <div class="option-item">
+                            <input type="radio" name="a7" id="a7-3">
+                            <label for="a7-3">text-height</label>
+                        </div>
+                        <div class="option-item">
+                            <input type="radio" name="a7" id="a7-4">
+                            <label for="a7-4">line-spacing</label>
+                        </div>
+                    </div>
+                    <div class="buttons">
+                        <label for="q6" class="prev-btn">Previous</label>
+                        <label for="q8" class="next-btn">Next</label>
+                    </div>
                 </div>
             </div>
-            <div class="buttons">
-                <label for="q6" class="prev-btn">Previous</label>
-                <label for="q8" class="next-btn">Next</label>
-            </div>
-        </div>
-    </div>
 
-    <!-- Question 8 -->
-    <div class="question-slide" id="slide8">
-        <div class="question-counter">Question 8 of 10</div>
-        <div class="question-content">
-            <h2>What is the correct way to add a comment in CSS?</h2>
-            <div class="options">
-                <div class="option-item">
-                    <input type="radio" name="a8" id="a8-1">
-                    <label for="a8-1">// This is a comment</label>
-                </div>
-                <div class="option-item">
-                    <input type="radio" name="a8" id="a8-2">
-                    <label for="a8-2">/* This is a comment */</label>
-                </div>
-                <div class="option-item">
-                    <input type="radio" name="a8" id="a8-3">
-                    <label for="a8-3">&lt;!-- This is a comment --&gt;</label>
-                </div>
-                <div class="option-item">
-                    <input type="radio" name="a8" id="a8-4">
-                    <label for="a8-4"># This is a comment</label>
+            <!-- Question 8 -->
+            <div class="question-slide" id="slide8">
+                <div class="question-counter">Question 8 of 10</div>
+                <div class="question-content">
+                    <h2>What is the correct way to add a comment in CSS?</h2>
+                    <div class="options">
+                        <div class="option-item">
+                            <input type="radio" name="a8" id="a8-1">
+                            <label for="a8-1">// This is a comment</label>
+                        </div>
+                        <div class="option-item">
+                            <input type="radio" name="a8" id="a8-2">
+                            <label for="a8-2">/* This is a comment */</label>
+                        </div>
+                        <div class="option-item">
+                            <input type="radio" name="a8" id="a8-3">
+                            <label for="a8-3">&lt;!-- This is a comment --&gt;</label>
+                        </div>
+                        <div class="option-item">
+                            <input type="radio" name="a8" id="a8-4">
+                            <label for="a8-4"># This is a comment</label>
+                        </div>
+                    </div>
+                    <div class="buttons">
+                        <label for="q7" class="prev-btn">Previous</label>
+                        <label for="q9" class="next-btn">Next</label>
+                    </div>
                 </div>
             </div>
-            <div class="buttons">
-                <label for="q7" class="prev-btn">Previous</label>
-                <label for="q9" class="next-btn">Next</label>
-            </div>
-        </div>
-    </div>
 
-    <!-- Question 9 -->
-    <div class="question-slide" id="slide9">
-        <div class="question-counter">Question 9 of 10</div>
-        <div class="question-content">
-            <h2>Which HTML tag is used to define an unordered list?</h2>
-            <div class="options">
-                <div class="option-item">
-                    <input type="radio" name="a9" id="a9-1">
-                    <label for="a9-1">&lt;ul&gt;</label>
-                </div>
-                <div class="option-item">
-                    <input type="radio" name="a9" id="a9-2">
-                    <label for="a9-2">&lt;ol&gt;</label>
-                </div>
-                <div class="option-item">
-                    <input type="radio" name="a9" id="a9-3">
-                    <label for="a9-3">&lt;list&gt;</label>
-                </div>
-                <div class="option-item">
-                    <input type="radio" name="a9" id="a9-4">
-                    <label for="a9-4">&lt;dl&gt;</label>
+            <!-- Question 9 -->
+            <div class="question-slide" id="slide9">
+                <div class="question-counter">Question 9 of 10</div>
+                <div class="question-content">
+                    <h2>Which HTML tag is used to define an unordered list?</h2>
+                    <div class="options">
+                        <div class="option-item">
+                            <input type="radio" name="a9" id="a9-1">
+                            <label for="a9-1">&lt;ul&gt;</label>
+                        </div>
+                        <div class="option-item">
+                            <input type="radio" name="a9" id="a9-2">
+                            <label for="a9-2">&lt;ol&gt;</label>
+                        </div>
+                        <div class="option-item">
+                            <input type="radio" name="a9" id="a9-3">
+                            <label for="a9-3">&lt;list&gt;</label>
+                        </div>
+                        <div class="option-item">
+                            <input type="radio" name="a9" id="a9-4">
+                            <label for="a9-4">&lt;dl&gt;</label>
+                        </div>
+                    </div>
+                    <div class="buttons">
+                        <label for="q8" class="prev-btn">Previous</label>
+                        <label for="q10" class="next-btn">Next</label>
+                    </div>
                 </div>
             </div>
-            <div class="buttons">
-                <label for="q8" class="prev-btn">Previous</label>
-                <label for="q10" class="next-btn">Next</label>
-            </div>
-        </div>
-    </div>
 
-    <!-- Question 10 -->
-    <div class="question-slide" id="slide10">
-        <div class="question-counter">Question 10 of 10</div>
-        <div class="question-content">
-            <h2>Which of these is a pseudo-class in CSS?</h2>
-            <div class="options">
-                <div class="option-item">
-                    <input type="radio" name="a10" id="a10-1">
-                    <label for="a10-1">:before</label>
-                </div>
-                <div class="option-item">
-                    <input type="radio" name="a10" id="a10-2">
-                    <label for="a10-2">:hover</label>
-                </div>
-                <div class="option-item">
-                    <input type="radio" name="a10" id="a10-3">
-                    <label for="a10-3">::first-line</label>
-                </div>
-                <div class="option-item">
-                    <input type="radio" name="a10" id="a10-4">
-                    <label for="a10-4">::selection</label>
+            <!-- Question 10 -->
+            <div class="question-slide" id="slide10">
+                <div class="question-counter">Question 10 of 10</div>
+                <div class="question-content">
+                    <h2>Which of these is a pseudo-class in CSS?</h2>
+                    <div class="options">
+                        <div class="option-item">
+                            <input type="radio" name="a10" id="a10-1">
+                            <label for="a10-1">:before</label>
+                        </div>
+                        <div class="option-item">
+                            <input type="radio" name="a10" id="a10-2">
+                            <label for="a10-2">:hover</label>
+                        </div>
+                        <div class="option-item">
+                            <input type="radio" name="a10" id="a10-3">
+                            <label for="a10-3">::first-line</label>
+                        </div>
+                        <div class="option-item">
+                            <input type="radio" name="a10" id="a10-4">
+                            <label for="a10-4">::selection</label>
+                        </div>
+                    </div>
+                    <div class="buttons">
+                        <label for="q9" class="prev-btn">Previous</label>
+                        <div class="buttons centered">
+                            <input type="hidden" name="question_id" value="10">
+                            <input type="submit" name="next_question" value="results" class="next-btn">
+                        </div>
+                    </div>
                 </div>
             </div>
-            <div class="buttons">
-                <label for="q9" class="prev-btn">Previous</label>
-                <label for="results" class="next-btn">Finish Quiz</label>
-            </div>
-        </div>
-    </div>
 
-    <!-- Results -->
-    <div class="question-slide" id="slide-results">
-        <div class="question-content results">
-            <h2>Thank you for completing the quiz!</h2>
-            <div class="score">7/10</div>
-            <p>Great effort! Here's your performance breakdown:</p>
-            
-            <div class="feedback">
-                <h3>Areas for Improvement</h3>
-                <p>Based on your answers, we recommend focusing on:</p>
-                <ul>
-                    <li>CSS Selectors - particularly pseudo-elements vs pseudo-classes</li>
-                    <li>HTML5 Semantic Elements - understanding proper usage</li>
-                    <li>CSS Units - practicing with relative vs absolute units</li>
-                </ul>
-            </div>
-            
-            <div class="feedback">
-                <h3>Learning Resources</h3>
-                <ul>
-                    <li>Complete the CSS Grid tutorial on MDN Web Docs</li>
-                    <li>Practice building responsive layouts with Flexbox</li>
-                    <li>Take the free HTML5 certification on W3Schools</li>
-                </ul>
-            </div>
-            
-            <div class="buttons centered">
-                <label for="q1" class="restart-btn">Start Again</label>
+            <!-- Results -->
+            <div class="question-slide" id="slide-results">
+                <div class="question-content results">
+                    <h2>Thank you for completing the quiz!</h2>
+                    <div class="score">7/10</div>
+                    <p>Great effort! Here's your performance breakdown:</p>
+                    
+                    <div class="feedback">
+                        <h3>Areas for Improvement</h3>
+                        <p>Based on your answers, we recommend focusing on:</p>
+                        <ul>
+                            <li>CSS Selectors - particularly pseudo-elements vs pseudo-classes</li>
+                            <li>HTML5 Semantic Elements - understanding proper usage</li>
+                            <li>CSS Units - practicing with relative vs absolute units</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="feedback">
+                        <h3>Learning Resources</h3>
+                        <ul>
+                            <li>Complete the CSS Grid tutorial on MDN Web Docs</li>
+                            <li>Practice building responsive layouts with Flexbox</li>
+                            <li>Take the free HTML5 certification on W3Schools</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="buttons centered">
+                        <label for="q1" class="restart-btn">Start Again</label>
+                    </div>
+                </div>
             </div>
         </div>
-    </div>
-</div>
+    </form>
 
 <style>
 /* Base styles */

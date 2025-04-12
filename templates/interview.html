@@ -1,0 +1,1574 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interview Preparation App</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        
+        :root {
+            --primary: #6c63ff;
+            --secondary: #4a41da;
+            --success: #4CAF50;
+            --danger: #f44336;
+            --light: #f5f5f5;
+            --dark: #1e1e2e;
+            --darker: #13131f;
+            --text: #e0e0e0;
+            --text-muted: #a0a0a0;
+            --border-radius: 12px;
+            --shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--darker);
+            color: var(--text);
+            line-height: 1.6;
+            overflow-x: hidden;
+            min-height: 100vh;
+            width: 100%;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .container {
+            width: 100%;
+            min-height: 100vh;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+        }
+
+        header {
+            text-align: center;
+            padding: 1.5rem;
+            background-color: var(--dark);
+            box-shadow: var(--shadow);
+        }
+
+        header h1 {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+
+        header p {
+            color: var(--text-muted);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .app-container {
+            display: flex;
+            flex: 1;
+            width: 100%;
+        }
+
+        .sidebar {
+            background-color: var(--dark);
+            box-shadow: var(--shadow);
+            padding: 1.5rem 1rem;
+            width: 250px;
+            flex-shrink: 0;
+        }
+
+        .nav-item {
+            margin-bottom: 0.8rem;
+        }
+
+        .nav-button {
+            display: flex;
+            align-items: center;
+            width: 100%;
+            padding: 1rem 1.2rem;
+            border: none;
+            border-radius: var(--border-radius);
+            background-color: transparent;
+            color: var(--text);
+            text-align: left;
+            font-size: 1rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .nav-button:hover {
+            background-color: rgba(108, 99, 255, 0.1);
+        }
+
+        .nav-button.active {
+            background-color: var(--primary);
+            color: white;
+        }
+
+        .content {
+            flex-grow: 1;
+            background-color: var(--dark);
+            padding: 2rem;
+            overflow-y: auto;
+            max-height: calc(100vh - 5rem);
+        }
+
+        .section {
+            display: none;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section.active {
+            display: block;
+            animation: fadeIn 0.5s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .card {
+            background-color: var(--darker);
+            border-radius: var(--border-radius);
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            width: 100%;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 0.8rem 1.5rem;
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            border-radius: var(--border-radius);
+            font-weight: 500;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .btn:hover {
+            background-color: var(--secondary);
+            transform: translateY(-2px);
+        }
+
+        .btn:active {
+            transform: translateY(0);
+        }
+
+        .btn-secondary {
+            background-color: transparent;
+            border: 1px solid var(--primary);
+            color: var(--primary);
+        }
+
+        .btn-secondary:hover {
+            background-color: rgba(108, 99, 255, 0.1);
+        }
+
+        .btn-danger {
+            background-color: var(--danger);
+        }
+
+        .btn-success {
+            background-color: var(--success);
+        }
+
+        /* Tabs */
+        .tabs {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.8rem;
+            margin-bottom: 2rem;
+        }
+
+        .tab {
+            padding: 0.8rem 1.5rem;
+            background-color: var(--darker);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: var(--border-radius);
+            color: var(--text);
+            cursor: pointer;
+            transition: var(--transition);
+            font-size: 1rem;
+        }
+
+        .tab:hover {
+            background-color: rgba(108, 99, 255, 0.1);
+        }
+
+        .tab.active {
+            background-color: var(--primary);
+            color: white;
+        }
+
+        /* Quiz */
+        .quiz-category {
+            margin-bottom: 2rem;
+        }
+
+        .quiz-question {
+            margin-bottom: 2rem;
+        }
+
+        .quiz-options {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        .quiz-option {
+            background-color: var(--dark);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: var(--border-radius);
+            padding: 1rem 1.5rem;
+            cursor: pointer;
+            transition: var(--transition);
+            font-size: 1rem;
+        }
+
+        .quiz-option:hover {
+            background-color: rgba(108, 99, 255, 0.1);
+        }
+
+        .quiz-option.selected {
+            border-color: var(--primary);
+        }
+
+        .quiz-option.correct {
+            background-color: rgba(76, 175, 80, 0.2);
+            border-color: var(--success);
+        }
+
+        .quiz-option.incorrect {
+            background-color: rgba(244, 67, 54, 0.2);
+            border-color: var(--danger);
+        }
+
+        .quiz-result {
+            margin-top: 2rem;
+            text-align: center;
+        }
+
+        .quiz-score {
+            font-size: 2rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+        }
+
+        .quiz-navigation {
+            display: flex;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        /* Form Controls */
+        .form-group {
+            margin-bottom: 2rem;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 0.8rem;
+            font-weight: 500;
+            font-size: 1.1rem;
+        }
+
+        input, textarea, select {
+            width: 100%;
+            padding: 1rem 1.2rem;
+            background-color: var(--darker);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: var(--border-radius);
+            color: var(--text);
+            font-family: 'Poppins', sans-serif;
+            font-size: 1rem;
+            transition: var(--transition);
+        }
+
+        input:focus, textarea:focus, select:focus {
+            outline: none;
+            border-color: var(--primary);
+        }
+
+        textarea {
+            min-height: 200px;
+            resize: vertical;
+        }
+
+        /* Communication Skills */
+        .sample-answer {
+            display: none;
+            margin-top: 1.5rem;
+            padding: 1.5rem;
+            background-color: rgba(108, 99, 255, 0.1);
+            border-radius: var(--border-radius);
+        }
+
+        /* Breathing Animation */
+        .breathing-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 300px;
+            margin: 3rem 0;
+        }
+
+        .breathing-circle {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            background: linear-gradient(45deg, var(--primary), var(--secondary));
+            animation: breathe 5s infinite alternate ease-in-out;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            font-size: 1rem;
+            text-align: center;
+        }
+
+        @keyframes breathe {
+            0% {
+                transform: scale(1);
+                box-shadow: 0 0 0 0 rgba(108, 99, 255, 0.7);
+            }
+            100% {
+                transform: scale(1.3);
+                box-shadow: 0 0 20px 10px rgba(108, 99, 255, 0.3);
+            }
+        }
+
+        /* Quote Cards */
+        .quote-card {
+            padding: 2rem;
+            margin-bottom: 1.5rem;
+            border-radius: var(--border-radius);
+            background-color: var(--dark);
+            position: relative;
+            transition: var(--transition);
+        }
+
+        .quote-card::before {
+            content: '"';
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            font-size: 4rem;
+            color: rgba(108, 99, 255, 0.2);
+            font-family: Georgia, serif;
+        }
+
+        .quote-card p {
+            margin-left: 30px;
+            font-size: 1.1rem;
+        }
+
+        .quote-card .author {
+            text-align: right;
+            font-style: italic;
+            color: var(--text-muted);
+            margin-top: 1rem;
+        }
+
+        /* Checklist */
+        .checklist {
+            list-style: none;
+            margin: 2rem 0;
+        }
+
+        .checklist-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1rem;
+            padding: 1rem;
+            border-radius: var(--border-radius);
+            background-color: var(--dark);
+            transition: var(--transition);
+        }
+
+        .checklist-item:hover {
+            transform: translateX(5px);
+        }
+
+        .checklist-item input[type="checkbox"] {
+            width: auto;
+            margin-right: 1.5rem;
+            transform: scale(1.2);
+        }
+
+        .checklist-item label {
+            margin: 0;
+            font-size: 1.1rem;
+        }
+
+        /* Mobile Responsiveness */
+        @media (max-width: 900px) {
+            .app-container {
+                flex-direction: column;
+            }
+
+            .sidebar {
+                width: 100%;
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 10px;
+                padding: 1rem;
+            }
+
+            .nav-item {
+                margin-bottom: 0;
+                flex: 0 0 auto;
+            }
+
+            .nav-button {
+                padding: 0.8rem 1rem;
+                justify-content: center;
+            }
+
+            .content {
+                padding: 1.5rem;
+                max-height: none;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .nav-button {
+                font-size: 0.9rem;
+                padding: 0.7rem 0.8rem;
+            }
+
+            .card {
+                padding: 1.5rem;
+            }
+
+            .quiz-option {
+                padding: 0.8rem 1rem;
+            }
+
+            .btn {
+                padding: 0.7rem 1.2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Interview Prep Pro</h1>
+            <p>Comprehensive preparation for your next interview</p>
+        </header>
+
+        <div class="app-container">
+            <nav class="sidebar">
+                <div class="nav-item">
+                    <button class="nav-button active" data-section="aptitude">
+                        <span>📊 Aptitude Quiz</span>
+                    </button>
+                </div>
+                <div class="nav-item">
+                    <button class="nav-button" data-section="technical">
+                        <span>📁 Technical Round</span>
+                    </button>
+                </div>
+                <div class="nav-item">
+                    <button class="nav-button" data-section="hr">
+                        <span>🎭 HR Interview</span>
+                    </button>
+                </div>
+                <div class="nav-item">
+                    <button class="nav-button" data-section="judgement">
+                        <span>🧪 Situational Judgement</span>
+                    </button>
+                </div>
+                <div class="nav-item">
+                    <button class="nav-button" data-section="communication">
+                        <span>🗣️ Communication Skills</span>
+                    </button>
+                </div>
+                <div class="nav-item">
+                    <button class="nav-button" data-section="anxiety">
+                        <span>🧘 Interview Anxiety Tips</span>
+                    </button>
+                </div>
+            </nav>
+
+            <main class="content">
+                <!-- Aptitude Quiz Section -->
+                <section id="aptitude" class="section active">
+                    <h2>Aptitude Quiz</h2>
+                    <p>Test your aptitude skills across different categories.</p>
+                    
+                    <div class="tabs aptitude-tabs">
+                        <div class="tab active" data-category="logical">Logical Reasoning</div>
+                        <div class="tab" data-category="quantitative">Quantitative Aptitude</div>
+                        <div class="tab" data-category="verbal">Verbal Ability</div>
+                    </div>
+                    
+                    <div class="card" id="aptitude-container">
+                        <div id="category-intro" class="quiz-category">
+                            <h3>Logical Reasoning</h3>
+                            <p>Test your logical reasoning skills with these questions.</p>
+                            <button class="btn start-quiz">Start Quiz</button>
+                        </div>
+                        
+                        <div id="quiz-questions" style="display: none;">
+                            <div class="quiz-question">
+                                <h4 id="question-text">Question text goes here</h4>
+                                <div class="quiz-options" id="quiz-options">
+                                    <!-- Options will be dynamically added here -->
+                                </div>
+                            </div>
+                            
+                            <div class="quiz-navigation">
+                                <button class="btn btn-secondary" id="prev-question" style="display: none;">Previous</button>
+                                <button class="btn" id="next-question">Next</button>
+                                <button class="btn btn-success" id="submit-quiz" style="display: none;">Submit Quiz</button>
+                            </div>
+                        </div>
+                        
+                        <div id="quiz-results" style="display: none;">
+                            <div class="quiz-result">
+                                <div class="quiz-score">Your score: <span id="score">0</span>/<span id="total">5</span></div>
+                                <p id="result-message">Great job! You've completed the quiz.</p>
+                                <button class="btn" id="retake-quiz">Retake Quiz</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <h3>Your Performance</h3>
+                        <div id="aptitude-stats">
+                            <p>Logical Reasoning: <span id="logical-score">Not attempted</span></p>
+                            <p>Quantitative Aptitude: <span id="quantitative-score">Not attempted</span></p>
+                            <p>Verbal Ability: <span id="verbal-score">Not attempted</span></p>
+                        </div>
+                    </div>
+                </section>
+                
+                <!-- Technical Round Section -->
+                <section id="technical" class="section">
+                    <h2>Technical Round Questions</h2>
+                    <p>Practice technical questions for your specific domain.</p>
+                    
+                    <div class="tabs career-tabs">
+                        <div class="tab active" data-career="webdev">Web Development</div>
+                        <div class="tab" data-career="datascience">Data Science</div>
+                    </div>
+                    
+                    <div id="webdev-content">
+                        <div class="tabs webdev-tabs">
+                            <div class="tab active" data-tech="html">HTML</div>
+                            <div class="tab" data-tech="css">CSS</div>
+                            <div class="tab" data-tech="js">JavaScript</div>
+                        </div>
+                        
+                        <div class="card tech-questions" id="html-questions">
+                            <h3>HTML Questions</h3>
+                            <!-- HTML questions will be dynamically added here -->
+                        </div>
+                        
+                        <div class="card tech-questions" id="css-questions" style="display: none;">
+                            <h3>CSS Questions</h3>
+                            <!-- CSS questions will be dynamically added here -->
+                        </div>
+                        
+                        <div class="card tech-questions" id="js-questions" style="display: none;">
+                            <h3>JavaScript Questions</h3>
+                            <!-- JS questions will be dynamically added here -->
+                        </div>
+                    </div>
+                    
+                    <div id="datascience-content" style="display: none;">
+                        <div class="tabs datascience-tabs">
+                            <div class="tab active" data-tech="python">Python</div>
+                            <div class="tab" data-tech="ml">Machine Learning</div>
+                            <div class="tab" data-tech="sql">SQL</div>
+                        </div>
+                        
+                        <div class="card tech-questions" id="python-questions">
+                            <h3>Python Questions</h3>
+                            <!-- Python questions will be dynamically added here -->
+                        </div>
+                        
+                        <div class="card tech-questions" id="ml-questions" style="display: none;">
+                            <h3>Machine Learning Questions</h3>
+                            <!-- ML questions will be dynamically added here -->
+                        </div>
+                        
+                        <div class="card tech-questions" id="sql-questions" style="display: none;">
+                            <h3>SQL Questions</h3>
+                            <!-- SQL questions will be dynamically added here -->
+                        </div>
+                    </div>
+                </section>
+                
+                <!-- HR Interview Simulator Section -->
+                <section id="hr" class="section">
+                    <h2>HR Interview Simulator</h2>
+                    <p>Practice common HR interview questions and improve your responses.</p>
+                    
+                    <div class="card" id="hr-simulator">
+                        <div id="hr-intro">
+                            <h3>Welcome to the HR Interview Simulator</h3>
+                            <p>This simulation will present you with common HR questions and multiple options for answers. Select the answer you would choose and receive feedback on your choice.</p>
+                            <button class="btn" id="start-hr">Start Simulation</button>
+                        </div>
+                        
+                        <div id="hr-question-container" style="display: none;">
+                            <h3 id="hr-question-text">Question text goes here</h3>
+                            <div class="quiz-options" id="hr-options">
+                                <!-- Options will be dynamically added here -->
+                            </div>
+                        </div>
+                        
+                        <div id="hr-feedback" style="display: none;">
+                            <h3>Feedback</h3>
+                            <p id="hr-feedback-text"></p>
+                            <button class="btn" id="next-hr-question">Next Question</button>
+                            <button class="btn btn-secondary" id="restart-hr" style="display: none;">Restart Simulation</button>
+                        </div>
+                    </div>
+                </section>
+                
+                <!-- Situational Judgement Section -->
+                <section id="judgement" class="section">
+                    <h2>Situational Judgement Test</h2>
+                    <p>Assess your decision-making skills in workplace scenarios.</p>
+                    
+                    <div class="card" id="sjt-container">
+                        <div id="sjt-intro">
+                            <h3>Situational Judgement Test</h3>
+                            <p>This test presents real-world workplace scenarios. Choose the most appropriate response for each situation.</p>
+                            <button class="btn" id="start-sjt">Start Test</button>
+                        </div>
+                        
+                        <div id="sjt-question-container" style="display: none;">
+                            <h3 id="sjt-scenario">Scenario text goes here</h3>
+                            <div class="quiz-options" id="sjt-options">
+                                <!-- Options will be dynamically added here -->
+                            </div>
+                        </div>
+                        
+                        <div id="sjt-feedback" style="display: none;">
+                            <h3>Best Approach</h3>
+                            <div class="quiz-option correct" id="sjt-best-option">The best option appears here</div>
+                            <div id="sjt-explanation" style="margin-top: 1.5rem;">
+                                <h4>Why this is the best approach:</h4>
+                                <p id="sjt-explanation-text"></p>
+                            </div>
+                            <button class="btn" id="next-sjt">Next Scenario</button>
+                            <button class="btn btn-secondary" id="restart-sjt" style="display: none;">Restart Test</button>
+                        </div>
+                    </div>
+                </section>
+                
+                <!-- Communication Skills Assessment Section -->
+                <section id="communication" class="section">
+                    <h2>Communication Skills Assessment</h2>
+                    <p>Practice written communication for professional contexts.</p>
+                    
+                    <div class="card">
+                        <h3>Professional Email to a Manager</h3>
+                        <p>Write a professional email requesting time off for personal reasons.</p>
+                        
+                        <div class="form-group">
+                            <textarea id="email-text" placeholder="Write your email here..."></textarea>
+                            <!-- For Email Analysis -->
+                            <button class="btn btn-primary" onclick="analyzeInput('email')">Analyze Email</button>
+                            <div id="email-feedback" class="feedback-box"></div>
+
+                        </div>
+                        
+                        <button class="btn btn-secondary" id="show-email-sample">Show Sample</button>
+                        
+                        <div class="sample-answer" id="email-sample">
+                            <h4>Sample Email:</h4>
+                            <p>
+                                Subject: Request for Personal Leave<br><br>
+                                Dear [Manager's Name],<br><br>
+                                I hope this email finds you well. I am writing to request time off from [start date] to [end date] for personal reasons.<br><br>
+                                I have already completed all my pending tasks and will ensure a smooth handover to [colleague's name] who has agreed to cover for me during my absence. I will also be available on email for any urgent matters that may require my input.<br><br>
+                                Please let me know if you need any additional information or if there are any concerns regarding this request.<br><br>
+                                Thank you for your consideration.<br><br>
+                                Best regards,<br>
+                                [Your Name]
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <div class="card">
+                        <h3>Self-Introduction</h3>
+                        <p>Write a brief introduction about yourself for an interview (1-2 minutes when spoken).</p>
+                        
+                        <div class="form-group">
+                            <textarea id="intro-text" placeholder="Write your self-introduction here..."></textarea>
+                            <!-- For Intro Analysis -->
+                            <button class="btn btn-primary" onclick="analyzeInput('intro')">Analyze Intro</button>
+                            <div id="intro-feedback" class="feedback-box"></div>
+
+                        </div>
+                        
+                        <button class="btn btn-secondary" id="show-intro-sample">Show Sample</button>
+                        
+                        <div class="sample-answer" id="intro-sample">
+                            <h4>Sample Self-Introduction:</h4>
+                            <p>
+                                "Hello, I'm [Your Name], a [your profession] with [X years] of experience in [your industry]. I graduated from [University] with a degree in [your field], and since then, I've been passionate about [key area of interest].<br><br>
+                                In my current role at [Current Company], I've successfully [mention 1-2 key achievements]. I specialize in [your key skills] and enjoy tackling challenges that involve [types of problems you enjoy solving].<br><br>
+                                Outside of work, I'm passionate about [hobbies or interests], which I believe helps me bring a creative perspective to my professional work.<br><br>
+                                I'm excited about this opportunity because [specific reason related to the company/role], and I believe my background in [relevant experience] makes me a strong candidate for this position."
+                            </p>
+                        </div>
+                        
+                        <div style="margin-top: 1.5rem; padding: 1rem; background-color: rgba(108, 99, 255, 0.1); border-radius: var(--border-radius);">
+                            <p><strong>Note:</strong> Grammar and content analysis coming soon with AI integration!</p>
+                        </div>
+                    </div>
+                </section>
+                
+                <!-- Interview Anxiety Tips Section -->
+                <section id="anxiety" class="section">
+                    <h2>Interview Anxiety Management</h2>
+                    <p>Techniques and tips to manage interview anxiety effectively.</p>
+                    
+                    <div class="card">
+                        <h3>Breathing Exercise</h3>
+                        <p>Practice this breathing exercise before your interview to calm your nerves.</p>
+                        
+                        <div class="breathing-container">
+                            <div class="breathing-circle">
+                                Breathe in... Breathe out...
+                            </div>
+                        </div>
+                        
+                        <p style="text-align: center; font-size: 1.1rem;">Inhale for 4 counts, hold for 4 counts, exhale for 6 counts. Repeat 5 times.</p>
+                    </div>
+                    
+                    <div class="card">
+                        <h3>Motivational Quotes</h3>
+                        
+                        <div class="quote-card">
+                            <p>"The future belongs to those who believe in the beauty of their dreams."</p>
+                            <p class="author">— Eleanor Roosevelt</p>
+                        </div>
+                        
+                        <div class="quote-card">
+                            <p>"The only way to do great work is to love what you do."</p>
+                            <p class="author">— Steve Jobs</p>
+                        </div>
+                        
+                        <div class="quote-card">
+                            <p>"Believe you can and you're halfway there."</p>
+                            <p class="author">— Theodore Roosevelt</p>
+                        </div>
+                    </div>
+                    
+                    <div class="card">
+                        <h3>Pre-Interview Checklist</h3>
+                        <p>Use this checklist to ensure you're fully prepared for your interview.</p>
+                        
+                        <ul class="checklist">
+                            <li class="checklist-item">
+                                <input type="checkbox" id="check1">
+                                <label for="check1">Research the company and role thoroughly</label>
+                            </li>
+                            <li class="checklist-item">
+                                <input type="checkbox" id="check2">
+                                <label for="check2">Prepare answers to common questions</label>
+                            </li>
+                            <li class="checklist-item">
+                                <input type="checkbox" id="check3">
+                                <label for="check3">Practice with a friend or in front of a mirror</label>
+                            </li>
+                            <li class="checklist-item">
+                                <input type="checkbox" id="check4">
+                                <label for="check4">Plan your outfit the night before</label>
+                            </li>
+                            <li class="checklist-item">
+                                <input type="checkbox" id="check5">
+                                <label for="check5">Get a good night's sleep</label>
+                            </li>
+                            <li class="checklist-item">
+                                <input type="checkbox" id="check6">
+                                <label for="check6">Eat a healthy breakfast</label>
+                            </li>
+                            <li class="checklist-item">
+                                <input type="checkbox" id="check7">
+                                <label for="check7">Arrive 10-15 minutes early</label>
+                            </li>
+                            <li class="checklist-item">
+                                <input type="checkbox" id="check8">
+                                <label for="check8">Do a breathing exercise before entering</label>
+                            </li>
+                        </ul>
+                    </div>
+                </section>
+            </main>
+        </div>
+    </div>
+
+    <script>
+        // Navigation
+        const navButtons = document.querySelectorAll('.nav-button');
+        const sections = document.querySelectorAll('.section');
+
+        navButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                const sectionId = button.getAttribute('data-section');
+                
+                // Update active button
+                navButtons.forEach(btn => btn.classList.remove('active'));
+                button.classList.add('active');
+                
+                // Show active section
+                sections.forEach(section => section.classList.remove('active'));
+                document.getElementById(sectionId).classList.add('active');
+            });
+        });
+
+        // Tab Navigation
+        function setupTabs(tabsSelector, contentSelector) {
+            const tabs = document.querySelectorAll(tabsSelector);
+            
+            tabs.forEach(tab => {
+                tab.addEventListener('click', () => {
+                    // Update active tab 
+                                        // Update active tab 
+                                        tabs.forEach(t => t.classList.remove('active'));
+                    tab.classList.add('active');
+
+                    // Show corresponding content
+                    const contents = document.querySelectorAll(contentSelector);
+                    contents.forEach(content => content.classList.remove('active'));
+                    const targetId = tab.getAttribute('data-target');
+                    document.getElementById(targetId).classList.add('active');
+                });
+            });
+        }
+
+        // Example tab setup (customize selectors if needed)
+        setupTabs('.tab-button', '.tab-content');
+
+        // Quote Rotator for Motivation Section
+        const quotes = [
+            "Believe in yourself and all that you are.",
+            "You are capable of amazing things.",
+            "Success is no accident. It’s hard work and perseverance.",
+            "Your future is created by what you do today, not tomorrow.",
+            "Don’t be afraid to fail. Be afraid not to try."
+        ];
+        const quoteElement = document.getElementById('quote');
+        if (quoteElement) {
+            let currentQuote = 0;
+            setInterval(() => {
+                quoteElement.textContent = quotes[currentQuote];
+                currentQuote = (currentQuote + 1) % quotes.length;
+            }, 5000); // Change every 5 seconds
+        }
+
+        // Breathing Animation Setup (if any JS needed for extra timing, etc.)
+
+        // You can add more dynamic JS features below this point
+        // Aptitude Quiz Implementation
+const startQuizBtn = document.querySelector('.start-quiz');
+const categoryIntro = document.getElementById('category-intro');
+const quizQuestions = document.getElementById('quiz-questions');
+const quizResults = document.getElementById('quiz-results');
+const questionText = document.getElementById('question-text');
+const quizOptions = document.getElementById('quiz-options');
+const prevBtn = document.getElementById('prev-question');
+const nextBtn = document.getElementById('next-question');
+const submitBtn = document.getElementById('submit-quiz');
+const retakeBtn = document.getElementById('retake-quiz');
+const scoreElement = document.getElementById('score');
+const totalElement = document.getElementById('total');
+const resultMessage = document.getElementById('result-message');
+
+// Sample quiz data
+const quizData = {
+    logical: [
+        {
+            question: "If all Bloops are Razzies and all Razzies are Lazzies, then which of the following must be true?",
+            options: [
+                "All Bloops are Lazzies", 
+                "All Lazzies are Bloops", 
+                "No Lazzies are Bloops", 
+                "Some Razzies are not Bloops"
+            ],
+            answer: 0
+        },
+        {
+            question: "Find the next number in the series: 2, 6, 12, 20, 30, ?",
+            options: ["36", "40", "42", "48"],
+            answer: 2
+        },
+        {
+            question: "Which of the following diagrams represents the relationship between Athletes, Swimmers, and Doctors?",
+            options: [
+                "Three separate circles", 
+                "Three overlapping circles", 
+                "Two overlapping circles with the third separate", 
+                "One circle inside another with the third separate"
+            ],
+            answer: 1
+        },
+        {
+            question: "If A + B means A is the father of B; A - B means A is the wife of B; A × B means A is the brother of B; A ÷ B means A is the daughter of B. Which of the following means M is the maternal uncle of N?",
+            options: [
+                "M × P - Q + N", 
+                "M × P + Q - N", 
+                "M × P - Q ÷ N", 
+                "M × P + Q ÷ N"
+            ],
+            answer: 0
+        },
+        {
+            question: "If 'KEYBOARD' is coded as 'AOBCYIDR', how is 'MONITOR' coded?",
+            options: [
+                "NTMRIOO", 
+                "MTIORNO", 
+                "NITROOM", 
+                "NITMOOR"
+            ],
+            answer: 3
+        }
+    ],
+    quantitative: [
+        {
+            question: "If a car travels at 60 km/hr instead of 40 km/hr, it takes 2 hours less to cover a certain distance. What is the distance?",
+            options: ["80 km", "120 km", "160 km", "240 km"],
+            answer: 2
+        },
+        {
+            question: "A shopkeeper bought a watch for $80 and sold it at a loss of 10%. What is the selling price?",
+            options: ["$72", "$76", "$78", "$88"],
+            answer: 0
+        },
+        {
+            question: "If 8 men can complete a work in 20 days, how many days will it take for 10 men to complete the same work?",
+            options: ["15 days", "16 days", "18 days", "22 days"],
+            answer: 1
+        },
+        {
+            question: "The average of 5 consecutive integers is 20. What is the largest of these integers?",
+            options: ["18", "20", "22", "24"],
+            answer: 2
+        },
+        {
+            question: "A train 200 meters long is running at a speed of 72 km/hr. How much time will it take to cross a platform 300 meters long?",
+            options: ["15 seconds", "20 seconds", "25 seconds", "30 seconds"],
+            answer: 2
+        }
+    ],
+    verbal: [
+        {
+            question: "Choose the word that is opposite in meaning to 'ELOQUENT':",
+            options: ["Articulate", "Incoherent", "Fluent", "Verbose"],
+            answer: 1
+        },
+        {
+            question: "Select the correctly spelled word:",
+            options: ["Committment", "Commitment", "Comitment", "Commitmentt"],
+            answer: 1
+        },
+        {
+            question: "Choose the word that best completes the sentence: The scientists made a ______ breakthrough in cancer research.",
+            options: ["significant", "trivial", "minor", "negligible"],
+            answer: 0
+        },
+        {
+            question: "Choose the correct meaning of the idiom 'To bite the dust':",
+            options: ["To eat dirt", "To die or be defeated", "To be humiliated", "To be very thirsty"],
+            answer: 1
+        },
+        {
+            question: "Which sentence has the correct grammar?",
+            options: [
+                "Neither of the students have completed their assignments.", 
+                "Either Jack or his friends is responsible for the damage.", 
+                "The committee has made their decision.", 
+                "Each of the members was asked to present their report."
+            ],
+            answer: 3
+        }
+    ]
+};
+
+// Current quiz state
+let currentCategory = 'logical';
+let currentQuestion = 0;
+let userAnswers = [];
+let score = 0;
+
+// Aptitude tab selection
+const aptitudeTabs = document.querySelectorAll('.aptitude-tabs .tab');
+aptitudeTabs.forEach(tab => {
+    tab.addEventListener('click', () => {
+        aptitudeTabs.forEach(t => t.classList.remove('active'));
+        tab.classList.add('active');
+        
+        currentCategory = tab.getAttribute('data-category');
+        document.querySelector('#category-intro h3').textContent = tab.textContent;
+        
+        // Reset quiz state
+        currentQuestion = 0;
+        userAnswers = [];
+        
+        // Show intro
+        categoryIntro.style.display = 'block';
+        quizQuestions.style.display = 'none';
+        quizResults.style.display = 'none';
+    });
+});
+
+// Start quiz button
+startQuizBtn.addEventListener('click', () => {
+    categoryIntro.style.display = 'none';
+    quizQuestions.style.display = 'block';
+    quizResults.style.display = 'none';
+    
+    // Initialize quiz
+    userAnswers = Array(quizData[currentCategory].length).fill(null);
+    loadQuestion(0);
+});
+
+// Load question
+function loadQuestion(index) {
+    currentQuestion = index;
+    const question = quizData[currentCategory][index];
+    
+    questionText.textContent = `Question ${index + 1}: ${question.question}`;
+    
+    // Generate options
+    quizOptions.innerHTML = '';
+    question.options.forEach((option, i) => {
+        const optionDiv = document.createElement('div');
+        optionDiv.classList.add('quiz-option');
+        if (userAnswers[currentQuestion] === i) {
+            optionDiv.classList.add('selected');
+        }
+        optionDiv.textContent = option;
+        optionDiv.addEventListener('click', () => selectOption(i));
+        quizOptions.appendChild(optionDiv);
+    });
+    
+    // Update navigation buttons
+    prevBtn.style.display = index > 0 ? 'inline-block' : 'none';
+    nextBtn.style.display = index < quizData[currentCategory].length - 1 ? 'inline-block' : 'none';
+    submitBtn.style.display = index === quizData[currentCategory].length - 1 ? 'inline-block' : 'none';
+}
+
+// Select option
+function selectOption(optionIndex) {
+    userAnswers[currentQuestion] = optionIndex;
+    
+    // Update selected option styling
+    const options = quizOptions.querySelectorAll('.quiz-option');
+    options.forEach((option, i) => {
+        if (i === optionIndex) {
+            option.classList.add('selected');
+        } else {
+            option.classList.remove('selected');
+        }
+    });
+}
+
+// Navigation
+nextBtn.addEventListener('click', () => {
+    if (currentQuestion < quizData[currentCategory].length - 1) {
+        loadQuestion(currentQuestion + 1);
+    }
+});
+
+prevBtn.addEventListener('click', () => {
+    if (currentQuestion > 0) {
+        loadQuestion(currentQuestion - 1);
+    }
+});
+
+submitBtn.addEventListener('click', () => {
+    // Calculate score
+    score = 0;
+    userAnswers.forEach((answer, index) => {
+        if (answer === quizData[currentCategory][index].answer) {
+            score++;
+        }
+    });
+    
+    // Update results
+    scoreElement.textContent = score;
+    totalElement.textContent = quizData[currentCategory].length;
+    
+    // Custom message based on score
+    const percentage = (score / quizData[currentCategory].length) * 100;
+    if (percentage >= 80) {
+        resultMessage.textContent = "Excellent! You have strong aptitude skills in this area.";
+    } else if (percentage >= 60) {
+        resultMessage.textContent = "Good job! You have decent aptitude skills, but there's room for improvement.";
+    } else {
+        resultMessage.textContent = "You need more practice in this area. Keep trying!";
+    }
+    
+    // Update score in stats
+    const scoreSpan = document.getElementById(`${currentCategory}-score`);
+    scoreSpan.textContent = `${score}/${quizData[currentCategory].length} (${percentage.toFixed(0)}%)`;
+    
+    // Show results
+    quizQuestions.style.display = 'none';
+    quizResults.style.display = 'block';
+});
+
+retakeBtn.addEventListener('click', () => {
+    currentQuestion = 0;
+    userAnswers = Array(quizData[currentCategory].length).fill(null);
+    loadQuestion(0);
+    quizResults.style.display = 'none';
+    quizQuestions.style.display = 'block';
+});
+
+// Technical Round Implementation
+// Technical tabs functionality
+const careerTabs = document.querySelectorAll('.career-tabs .tab');
+careerTabs.forEach(tab => {
+    tab.addEventListener('click', () => {
+        careerTabs.forEach(t => t.classList.remove('active'));
+        tab.classList.add('active');
+        
+        const career = tab.getAttribute('data-career');
+        document.getElementById('webdev-content').style.display = career === 'webdev' ? 'block' : 'none';
+        document.getElementById('datascience-content').style.display = career === 'datascience' ? 'block' : 'none';
+    });
+});
+
+// Web development tabs
+const webdevTabs = document.querySelectorAll('.webdev-tabs .tab');
+webdevTabs.forEach(tab => {
+    tab.addEventListener('click', () => {
+        webdevTabs.forEach(t => t.classList.remove('active'));
+        tab.classList.add('active');
+        
+        const tech = tab.getAttribute('data-tech');
+        document.querySelectorAll('.tech-questions').forEach(q => q.style.display = 'none');
+        document.getElementById(`${tech}-questions`).style.display = 'block';
+    });
+});
+
+// Data science tabs
+const dataScienceTabs = document.querySelectorAll('.datascience-tabs .tab');
+dataScienceTabs.forEach(tab => {
+    tab.addEventListener('click', () => {
+        dataScienceTabs.forEach(t => t.classList.remove('active'));
+        tab.classList.add('active');
+        
+        const tech = tab.getAttribute('data-tech');
+        document.querySelectorAll('#datascience-content .tech-questions').forEach(q => q.style.display = 'none');
+        document.getElementById(`${tech}-questions`).style.display = 'block';
+    });
+});
+
+// Sample technical questions
+const technicalQuestions = {
+    html: [
+        { question: "What is the purpose of the DOCTYPE declaration in HTML?", answer: "It tells the browser which version of HTML the page is using, which helps ensure proper rendering." },
+        { question: "Explain the difference between <div> and <span> elements.", answer: "A <div> is a block-level element that starts on a new line and takes up the full width available, while <span> is an inline element that only takes up as much width as necessary." },
+        { question: "What are semantic HTML elements?", answer: "Semantic elements clearly describe their meaning to both the browser and the developer. Examples include <header>, <footer>, <article>, and <section>." }
+    ],
+    css: [
+        { question: "Explain the box model in CSS.", answer: "The CSS box model is a box that wraps around every HTML element. It consists of: margins, borders, padding, and the actual content." },
+        { question: "What's the difference between 'display: none' and 'visibility: hidden'?", answer: "'display: none' removes the element from the document flow (no space is allocated), while 'visibility: hidden' hides the element but still allocates space for it." },
+        { question: "Explain CSS specificity.", answer: "Specificity is how browsers decide which CSS property values are the most relevant to an element. Inline styles have the highest specificity, followed by IDs, then classes, and finally element selectors." }
+    ],
+    js: [
+        { question: "What's the difference between 'let', 'const', and 'var'?", answer: "'var' is function-scoped, while 'let' and 'const' are block-scoped. 'const' variables cannot be reassigned after declaration, whereas 'let' variables can be." },
+        { question: "Explain event delegation in JavaScript.", answer: "Event delegation is a technique where you attach a single event listener to a parent element instead of multiple listeners to individual child elements." },
+        { question: "What are closures in JavaScript?", answer: "A closure is a function that has access to its own scope, the outer function's variables, and global variables, even after the outer function has returned." }
+    ],
+    python: [
+        { question: "What are Python decorators?", answer: "Decorators are functions that modify the functionality of another function. They are used to add functionality to existing code." },
+        { question: "Explain list comprehension in Python.", answer: "List comprehension is a concise way to create lists based on existing lists. It follows the form [expression for item in iterable if condition]." },
+        { question: "What's the difference between '==' and 'is' in Python?", answer: "'==' checks if the values of two objects are equal, while 'is' checks if two variables point to the same object in memory." }
+    ],
+    ml: [
+        { question: "What's the difference between supervised and unsupervised learning?", answer: "Supervised learning involves training with labeled data, while unsupervised learning uses unlabeled data to find patterns or relationships." },
+        { question: "Explain overfitting and how to avoid it.", answer: "Overfitting occurs when a model learns the training data too well, including noise. It can be avoided using techniques like cross-validation, regularization, or using more training data." },
+        { question: "What's the difference between classification and regression?", answer: "Classification predicts discrete class labels or categories, while regression predicts continuous values." }
+    ],
+    sql: [
+        { question: "What's the difference between INNER JOIN and LEFT JOIN?", answer: "INNER JOIN returns rows when there is a match in both tables. LEFT JOIN returns all rows from the left table and matched rows from the right table." },
+        { question: "Explain the purpose of normalization in databases.", answer: "Normalization is the process of organizing data to reduce redundancy and improve data integrity by dividing large tables into smaller, related tables." },
+        { question: "What are SQL indexes and why are they important?", answer: "Indexes are special lookup tables used by the database to speed up data retrieval. They improve query performance but can slow down data modification operations." }
+    ]
+};
+
+// Populate technical questions
+function populateTechnicalQuestions() {
+    for (const category in technicalQuestions) {
+        const container = document.getElementById(`${category}-questions`);
+        if (container) {
+            const questions = technicalQuestions[category];
+            questions.forEach((q, index) => {
+                const questionDiv = document.createElement('div');
+                questionDiv.classList.add('quiz-question');
+                questionDiv.innerHTML = `
+                    <h4>${index + 1}. ${q.question}</h4>
+                    <button class="btn btn-secondary show-answer" data-category="${category}" data-index="${index}">Show Answer</button>
+                    <div class="sample-answer" id="${category}-answer-${index}" style="display: none;">
+                        <p>${q.answer}</p>
+                    </div>
+                `;
+                container.appendChild(questionDiv);
+            });
+        }
+    }
+    
+    // Add event listeners to show answer buttons
+    document.querySelectorAll('.show-answer').forEach(button => {
+        button.addEventListener('click', () => {
+            const category = button.getAttribute('data-category');
+            const index = button.getAttribute('data-index');
+            const answerDiv = document.getElementById(`${category}-answer-${index}`);
+            
+            if (answerDiv.style.display === 'none') {
+                answerDiv.style.display = 'block';
+                button.textContent = 'Hide Answer';
+            } else {
+                answerDiv.style.display = 'none';
+                button.textContent = 'Show Answer';
+            }
+        });
+    });
+}
+
+// HR Interview Implementation
+const hrData = [
+    {
+        question: "Tell me about yourself.",
+        options: [
+            "I graduated from college 3 years ago and have been working in various jobs since then. I'm still trying to figure out what I want to do.",
+            "I'm a hardworking individual with 3 years of experience in this industry. I'm particularly skilled at [relevant skills] and have achieved [specific achievements] in my previous role at [company].",
+            "I don't really like talking about myself, but I can tell you about my previous work experience if you'd like.",
+            "I'm [your name], I have a degree in [your degree], and I'm looking for a better-paying job with better benefits."
+        ],
+        feedback: [
+            "This response lacks focus and doesn't highlight your relevant skills or experience. It also suggests you lack direction.",
+            "Excellent answer! This response is concise, professional, and highlights your relevant experience, skills, and achievements. It gives the interviewer a good understanding of your professional background.",
+            "This response comes across as evasive or uncomfortable, which might suggest communication issues.",
+            "While direct, this response focuses too much on what you want rather than what you can offer the company."
+        ],
+        bestOption: 1
+    },
+    {
+        question: "Why do you want to work for our company?",
+        options: [
+            "I've been following your company for years and am impressed by your innovative approaches to [specific projects/products]. I believe my skills in [relevant skills] would allow me to contribute effectively to your team.",
+            "Your company offers competitive salaries and good benefits, which is what I'm looking for right now.",
+            "I need a job and your opening matched my qualifications.",
+            "I've heard that the work environment here is very relaxed and that appeals to me."
+        ],
+        feedback: [
+            "Great answer! This shows you've done your research and are genuinely interested in the company. It also connects your skills to the company's needs.",
+            "This response suggests you're primarily motivated by compensation rather than the specific company or role, which may raise concerns about your commitment and engagement.",
+            "This answer is too generic and suggests a lack of genuine interest in the specific company.",
+            "While work environment is important, this answer suggests you might be more interested in comfort than in the work itself."
+        ],
+        bestOption: 0
+    },
+    {
+        question: "What is your greatest weakness?",
+        options: [
+            "I don't really have any weaknesses. I excel at everything I do.",
+            "I'm a perfectionist and sometimes spend too much time making sure everything is just right.",
+            "I'm working on improving my public speaking skills. I've joined Toastmasters and have been taking on more presentation opportunities to build my confidence in this area.",
+            "I'm not very good with technology and avoid using new software whenever possible."
+        ],
+        feedback: [
+            "This answer shows a lack of self-awareness and may suggest to the interviewer that you're unable to accept criticism or identify areas for improvement.",
+            "This is a cliché answer that interviewers hear frequently. It attempts to frame a positive as a negative without showing genuine self-reflection.",
+            "Excellent answer! This response acknowledges a legitimate area for improvement, but more importantly, it demonstrates that you're proactively working to address it.",
+            "This answer could be concerning, especially in roles that require technological adaptability. It also doesn't show any effort to improve this weakness."
+        ],
+        bestOption: 2
+    }
+];
+
+const startHrBtn = document.getElementById('start-hr');
+const hrIntro = document.getElementById('hr-intro');
+const hrQuestionContainer = document.getElementById('hr-question-container');
+const hrFeedback = document.getElementById('hr-feedback');
+const hrQuestionText = document.getElementById('hr-question-text');
+const hrOptions = document.getElementById('hr-options');
+const hrFeedbackText = document.getElementById('hr-feedback-text');
+const nextHrQuestionBtn = document.getElementById('next-hr-question');
+const restartHrBtn = document.getElementById('restart-hr');
+
+let currentHrQuestion = 0;
+
+// Start HR Interview Simulator
+startHrBtn.addEventListener('click', () => {
+    hrIntro.style.display = 'none';
+    hrFeedback.style.display = 'none';
+    hrQuestionContainer.style.display = 'block';
+    
+    loadHrQuestion(0);
+});
+
+// Load HR question
+function loadHrQuestion(index) {
+    currentHrQuestion = index;
+    const question = hrData[index];
+    
+    hrQuestionText.textContent = question.question;
+    
+    // Generate options
+    hrOptions.innerHTML = '';
+    question.options.forEach((option, i) => {
+        const optionDiv = document.createElement('div');
+        optionDiv.classList.add('quiz-option');
+        optionDiv.textContent = option;
+        optionDiv.addEventListener('click', () => selectHrOption(i));
+        hrOptions.appendChild(optionDiv);
+    });
+}
+
+// Select HR option
+function selectHrOption(optionIndex) {
+    const question = hrData[currentHrQuestion];
+    
+    hrQuestionContainer.style.display = 'none';
+    hrFeedback.style.display = 'block';
+    
+    hrFeedbackText.textContent = question.feedback[optionIndex];
+    
+    if (optionIndex === question.bestOption) {
+        hrFeedbackText.innerHTML = `<strong>Great choice!</strong> ${question.feedback[optionIndex]}`;
+    } else {
+        hrFeedbackText.innerHTML = `${question.feedback[optionIndex]}`;
+    }
+    
+    // Show restart button on last question
+    if (currentHrQuestion === hrData.length - 1) {
+        nextHrQuestionBtn.style.display = 'none';
+        restartHrBtn.style.display = 'inline-block';
+    } else {
+        nextHrQuestionBtn.style.display = 'inline-block';
+        restartHrBtn.style.display = 'none';
+    }
+}
+
+// Next HR question
+nextHrQuestionBtn.addEventListener('click', () => {
+    if (currentHrQuestion < hrData.length - 1) {
+        loadHrQuestion(currentHrQuestion + 1);
+        hrFeedback.style.display = 'none';
+        hrQuestionContainer.style.display = 'block';
+    }
+});
+
+// Restart HR simulation
+restartHrBtn.addEventListener('click', () => {
+    loadHrQuestion(0);
+    hrFeedback.style.display = 'none';
+    hrQuestionContainer.style.display = 'block';
+});
+
+// Situational Judgement Implementation
+const sjtData = [
+    {
+        scenario: "You notice a coworker taking small office supplies home for personal use.",
+        options: [
+            "Confront the coworker directly in front of others to embarrass them into stopping.",
+            "Report the coworker to management immediately without speaking to them first.",
+            "Speak to the coworker privately, expressing concern about the behavior and potential consequences.",
+            "Ignore it as it's just small items and not worth causing trouble."
+        ],
+        bestOption: 2,
+        explanation: "Speaking privately with the coworker shows respect while still addressing the issue. It gives them a chance to explain or correct their behavior without escalation. If the behavior continues after this conversation, then involving management may be necessary."
+    },
+    {
+        scenario: "Your team leader has assigned you a project with an unrealistic deadline.",
+        options: [
+            "Accept the deadline without question, even though you know it's impossible to meet.",
+            "Immediately reject the deadline and demand more time without explanation.",
+            "Request a meeting to discuss the scope, requirements, and timeline, bringing potential solutions to make it work.",
+            "Agree to the deadline but miss it intentionally to prove a point."
+        ],
+        bestOption: 2,
+        explanation: "Requesting a discussion shows professionalism and problem-solving skills. By bringing solutions rather than just identifying problems, you demonstrate a proactive attitude. This approach respects the leader's authority while also advocating for realistic expectations."
+    },
+    {
+        scenario: "You've discovered a significant error in a report that has already been sent to a client.",
+        options: [
+            "Hope nobody notices the error and say nothing.",
+            "Blame the error on someone else in your team who contributed to the report.",
+            "Notify your manager immediately, take responsibility, and propose sending a corrected version with an apology to the client.",
+            "Fix the error and send an updated report to the client without telling your manager."
+        ],
+        bestOption: 2,
+        explanation: "Taking responsibility and immediately notifying your manager demonstrates integrity and professionalism. Proposing a solution shows initiative. Transparency in this situation helps maintain trust with both your employer and the client, even though it might be uncomfortable in the short term."
+    }
+];
+
+const startSjtBtn = document.getElementById('start-sjt');
+const sjtIntro = document.getElementById('sjt-intro');
+const sjtQuestionContainer = document.getElementById('sjt-question-container');
+const sjtFeedback = document.getElementById('sjt-feedback');
+const sjtScenario = document.getElementById('sjt-scenario');
+const sjtOptions = document.getElementById('sjt-options');
+const sjtBestOption = document.getElementById('sjt-best-option');
+const sjtExplanationText = document.getElementById('sjt-explanation-text');
+const nextSjtBtn = document.getElementById('next-sjt');
+const restartSjtBtn = document.getElementById('restart-sjt');
+
+let currentSjtScenario = 0;
+
+// Start Situational Judgement Test
+startSjtBtn.addEventListener('click', () => {
+    sjtIntro.style.display = 'none';
+    sjtFeedback.style.display = 'none';
+    sjtQuestionContainer.style.display = 'block';
+    
+    loadSjtScenario(0);
+});
+
+// Load SJT scenario
+function loadSjtScenario(index) {
+    currentSjtScenario = index;
+    const scenario = sjtData[index];
+    
+    sjtScenario.textContent = scenario.scenario;
+    
+    // Generate options
+    sjtOptions.innerHTML = '';
+    scenario.options.forEach((option, i) => {
+        const optionDiv = document.createElement('div');
+        optionDiv.classList.add('quiz-option');
+        optionDiv.textContent = option;
+        optionDiv.addEventListener('click', () => selectSjtOption(i));
+        sjtOptions.appendChild(optionDiv);
+    });
+}
+
+// Select SJT option
+function selectSjtOption(optionIndex) {
+    const scenario = sjtData[currentSjtScenario];
+    
+    sjtQuestionContainer.style.display = 'none';
+    sjtFeedback.style.display = 'block';
+    
+    sjtBestOption.textContent = scenario.options[scenario.bestOption];
+    sjtExplanationText.textContent = scenario.explanation;
+    
+    // Show restart button on last scenario
+    if (currentSjtScenario === sjtData.length - 1) {
+        nextSjtBtn.style.display = 'none';
+        restartSjtBtn.style.display = 'inline-block';
+    } else {
+        nextSjtBtn.style.display = 'inline-block';
+        restartSjtBtn.style.display = 'none';
+    }
+}
+
+// Next SJT scenario
+nextSjtBtn.addEventListener('click', () => {
+    if (currentSjtScenario < sjtData.length - 1) {
+        loadSjtScenario(currentSjtScenario + 1);
+        sjtFeedback.style.display = 'none';
+        sjtQuestionContainer.style.display = 'block';
+    }
+});
+
+// Restart SJT
+restartSjtBtn.addEventListener('click', () => {
+    loadSjtScenario(0);
+
+    
+    sjtFeedback.style.display = 'none';
+    sjtQuestionContainer.style.display = 'block';
+});
+
+// Communication Skills Implementation
+const showEmailSampleBtn = document.getElementById('show-email-sample');
+const emailSample = document.getElementById('email-sample');
+const showIntroSampleBtn = document.getElementById('show-intro-sample');
+const introSample = document.getElementById('intro-sample');
+
+showEmailSampleBtn.addEventListener('click', () => {
+    if (emailSample.style.display === 'none' || emailSample.style.display === '') {
+        emailSample.style.display = 'block';
+        showEmailSampleBtn.textContent = 'Hide Sample';
+    } else {
+        emailSample.style.display = 'none';
+        showEmailSampleBtn.textContent = 'Show Sample';
+    }
+});
+
+showIntroSampleBtn.addEventListener('click', () => {
+    if (introSample.style.display === 'none' || introSample.style.display === '') {
+        introSample.style.display = 'block';
+        showIntroSampleBtn.textContent = 'Hide Sample';
+    } else {
+        introSample.style.display = 'none';
+        showIntroSampleBtn.textContent = 'Show Sample';
+    }
+});
+
+// Initialize the application
+populateTechnicalQuestions();
+    </script>
+    <script>
+        async function analyzeInput(type) {
+          const text = type === 'email'
+            ? document.getElementById('email-text').value
+            : document.getElementById('intro-text').value;
+      
+          if (!text.trim()) {
+            alert("Please enter some text before analyzing.");
+            return;
+          }
+      
+          const res = await fetch("/api/analyze", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json"
+            },
+            body: JSON.stringify({ text, type })
+          });
+      
+          const data = await res.json();
+      
+          const feedbackBox = document.getElementById(
+            type === "email" ? "email-feedback" : "intro-feedback"
+          );
+      
+          if (data.feedback) {
+            feedbackBox.innerHTML = `<pre>${data.feedback}</pre>`;
+          } else {
+            feedbackBox.innerHTML = `<p style="color: red;">Error: ${data.error || "Something went wrong."}</p>`;
+          }
+        }
+      </script>
+      
+</body>
+</html>
