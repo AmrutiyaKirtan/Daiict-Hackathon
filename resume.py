@@ -134,7 +134,7 @@ def extract_section(feedback, section_name):
 
 @app.route('/')
 def index():
-    return render_template('resume_upload.html')  # Use your HTML file here
+    return render_template('templates/resume_upload.html')  # Use your HTML file here
 
 @app.route('/api-info')
 def api_info():

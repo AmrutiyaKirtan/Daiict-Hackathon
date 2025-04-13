@@ -95,7 +95,7 @@ def index():
     session.clear()  # Clear any existing session data
     session['current_question'] = 0
     session['answers'] = {}
-    return render_template('index.html', question=quiz_data[0], quiz_data=quiz_data)
+    return render_template('templates/index.html', question=quiz_data[0], quiz_data=quiz_data)
 
 @app.route('/quiz', methods=['GET', 'POST'])
 def quiz():
@@ -117,13 +117,13 @@ def quiz():
             return redirect(url_for('results'))
         else:
             session['current_question'] = int(next_question) - 1
-            return render_template('index.html', 
+            return render_template('templates/index.html', 
                                   question=quiz_data[session['current_question']], 
                                   quiz_data=quiz_data,
                                   answers=session['answers'])
     
     # GET request - show current question
-    return render_template('index.html', 
+    return render_template('templates/index.html', 
                           question=quiz_data[session['current_question']], 
                           quiz_data=quiz_data,
                           answers=session.get('answers', {}))
